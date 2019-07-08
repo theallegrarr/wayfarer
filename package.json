@@ -1,0 +1,38 @@
+{
+  "name": "wayfarer-rough",
+  "version": "1.0.0",
+  "description": "node.js rough work",
+  "main": "./js/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint ./",
+    "build": "babel src -d js",
+    "start": "node ./js/server.js",
+    "filefix": "eslint --fix ./src/model/bookings.js",
+    "dbase": "node ./js/model/bookings.js"
+  },
+  "eslintIgnore": [
+    "-d js"
+  ],
+  "author": "Nurudeen",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "core-js": "^3.1.4",
+    "express": "^4.17.1",
+    "npm-install-all": "^1.1.21",
+    "pg": "^7.11.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-preset-env": "^1.7.0",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb-base": "^13.2.0",
+    "eslint-plugin-import": "^2.18.0"
+  },
+  "keywords": [
+    "wayfarer",
+    "andela"
+  ]
+}
