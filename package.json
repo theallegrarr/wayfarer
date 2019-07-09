@@ -8,7 +8,7 @@
     "lint": "eslint ./",
     "build": "babel src -d js",
     "start": "node ./js/server.js",
-    "filefix": "eslint --fix ./src/model/bookings.js",
+    "filefix": "eslint --fix ./src/model/data.js",
     "dbase": "node ./js/model/bookings.js"
   },
   "eslintIgnore": [
