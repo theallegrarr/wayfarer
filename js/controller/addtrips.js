@@ -28,7 +28,11 @@ function makeTrips(info) {
     user_id: info.user_id
   };
 
-  _trips2.default.push(data);
+  if (info.is_admin === 'true') {
+    _trips2.default.push(data);
+  } else {
+    return 'failed';
+  }
 
   return data;
 }

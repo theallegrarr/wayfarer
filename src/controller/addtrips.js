@@ -14,7 +14,11 @@ function makeTrips(info) {
     user_id: info.user_id,
   };
 
-  trips.push(data);
+  if (info.is_admin === 'true') {
+    trips.push(data);
+  } else {
+    return ('failed');
+  }
 
   return data;
 }

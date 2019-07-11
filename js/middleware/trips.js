@@ -26,7 +26,12 @@ var router = _express2.default.Router();
 
 router.post('/', _verify2.default, function (req, res) {
   var result = (0, _addtrips2.default)(req.body);
-
+  if (result === 'failed') {
+    res.status(400).json({
+      message: 'failed',
+      error: 'only admins can add trips'
+    });
+  }
   res.status(200).json({
     status: 'success',
     result: result
