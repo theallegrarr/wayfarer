@@ -12,7 +12,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function viewTrips(info) {
 
-  if (info.is_admin === 'true') {
+  if (info.is_admin === 'true' || info.is_admin === 'false') {
     return _trips2.default;
   }
 

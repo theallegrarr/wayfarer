@@ -2,7 +2,7 @@ import trips from '../model/trips';
 
 function viewTrips(info) {
 
-  if (info.is_admin === 'true') {
+  if (info.is_admin === 'true' || info.is_admin === 'false') {
     return trips;
   }
 
