@@ -12,18 +12,23 @@ var _bcrypt = require('bcrypt');
 
 var _bcrypt2 = _interopRequireDefault(_bcrypt);
 
-var _signin = require('../controller/signin');
-
-var _signin2 = _interopRequireDefault(_signin);
-
 var _jsonwebtoken = require('jsonwebtoken');
 
 var _jsonwebtoken2 = _interopRequireDefault(_jsonwebtoken);
 
+var _dotenv = require('dotenv');
+
+var _dotenv2 = _interopRequireDefault(_dotenv);
+
+var _signin = require('../controller/signin');
+
+var _signin2 = _interopRequireDefault(_signin);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// hold user requests sign-in sign-up
-var router = _express2.default.Router();
+var router = _express2.default.Router(); // hold user requests sign-in sign-up
+
+_dotenv2.default.config();
 
 router.post('/', function (req, res) {
   var data = {
@@ -36,13 +41,12 @@ router.post('/', function (req, res) {
 
   if (user) {
     _bcrypt2.default.compare(data.password, user.password, function (err, response) {
-      console.log(response);
       if (response === true) {
         var etoken = _jsonwebtoken2.default.sign({
           email: user.email,
           id: user.id
-        }, 'secret', {
-          expiresIn: "1h"
+        }, process.env.JWT_KEY, {
+          expiresIn: '1h'
         });
 
         res.status(200).json({
