@@ -2,12 +2,14 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import logRoute from '../middleware/signin';
 import regRoute from '../middleware/signup';
+import trips from '../middleware/trips';
 
 const app = express();
 
 app.use(bodyParser.json());
 app.use('/auth/signin', logRoute);
 app.use('/auth/signup', regRoute);
+app.use('/trips', trips);
 
 app.use('/', (req, res) => {
   res.status(200).json({

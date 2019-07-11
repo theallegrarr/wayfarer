@@ -2,9 +2,11 @@
 import express from 'express';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
 import signIn from '../controller/signin';
 
 const router = express.Router();
+dotenv.config();
 
 router.post('/', (req, res) => {
   const data = {
@@ -17,13 +19,12 @@ router.post('/', (req, res) => {
 
   if (user) {
     bcrypt.compare(data.password, user.password, (err, response) => {
-      console.log(response);
       if (response === true) {
         const etoken = jwt.sign({
           email: user.email,
           id: user.id,
-        }, 
-          'secret', 
+        },
+        process.env.JWT_KEY,
         {
           expiresIn: '1h',
         });
@@ -34,7 +35,7 @@ router.post('/', (req, res) => {
             user_id: user.id,
             is_admin: user.is_admin,
             token: etoken,
-          }
+          },
         });
       } else {
         res.status(401.1).json({
@@ -42,12 +43,12 @@ router.post('/', (req, res) => {
         });
       }
 
-      if(err){
+      if (err) {
         res.status(401.1).json({
           message: 'wrong login parameters',
         });
       }
-    }); 
+    });
   } else {
     res.status(401.1).json({
       message: 'wrong login parameters',
