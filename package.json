@@ -7,9 +7,10 @@
     "test": "mocha ./js/tests/*.js",
     "lint": "eslint ./",
     "build": "babel src -d js",
+    "prestart": "node ./js/model/createdb.js",
     "start": "node ./js/server.js",
     "filefix": "eslint --fix ./model/trips.js",
-    "dbase": "node ./js/model/trips.js"
+    "dbase": "node ./js/model/createdb.js"
   },
   "eslintIgnore": [
     "-d js"
