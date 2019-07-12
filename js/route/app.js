@@ -24,6 +24,10 @@ var _trips = require('../middleware/trips');
 
 var _trips2 = _interopRequireDefault(_trips);
 
+var _users = require('../middleware/users');
+
+var _users2 = _interopRequireDefault(_users);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var app = (0, _express2.default)();
@@ -32,6 +36,7 @@ app.use(_bodyParser2.default.json());
 app.use('/auth/signin', _signin2.default);
 app.use('/auth/signup', _signup2.default);
 app.use('/trips', _trips2.default);
+app.use('/users', _users2.default);
 
 app.use('/', function (req, res) {
   res.status(200).json({
