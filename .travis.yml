@@ -4,5 +4,3 @@ node_js:
 cache: npm
 services:
   - postgresql
-before_script:
-- psql -c "CREATE USER postgres WITH PASSWORD 'ludacris';" -U postgres
