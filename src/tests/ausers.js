@@ -69,7 +69,7 @@ describe('USER OPERATIONS', () => {
   it('Should Fail to Sign In', (done) => {
     chai.request(app)
       .post('/v1/auth/signin')
-      .send(user)
+      .send(user2)
       .end((err, res) => {
         res.should.have.status(409);
       // console.log('Response Body:', res.body);
