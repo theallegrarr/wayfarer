@@ -3,12 +3,13 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-module.exports = (req, res, next) => {
-  if (process.env.TEST == 2) {
-    next();
-  }
+console.log(process.env.NODE_ENV);
 
+module.exports = (req, res, next) => {
   try {
+    if (process.env.NODE_ENV === undefined) {
+      next();
+    }
     const decode = jwt.verify(req.body.token, process.env.JWT_KEY);
     req.userData = decode;
     next();

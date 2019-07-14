@@ -43,15 +43,6 @@ describe('USER OPERATIONS', function () {
     done();
   });
 
-  it('Should not add Duplicate users', function (done) {
-    _chai2.default.request(_app2.default).post('/v1/auth/signup').send(details).end(function (err, res) {
-      res.should.have.status(409);
-      (0, _chai.expect)(res.body).to.have.property('message');
-      // console.log('Response Body:', res.body);
-    });
-    done();
-  });
-
   var user = {
     email: 'joely@gmail.com',
     password: 'batoore',
@@ -67,13 +58,13 @@ describe('USER OPERATIONS', function () {
   });
 
   var user2 = {
-    email: 'johnpaul@gmail.com',
+    email: 'joely@gmail.com',
     password: 'batare',
     is_admin: 'true'
   };
 
   it('Should Fail to Sign In', function (done) {
-    _chai2.default.request(_app2.default).post('/v1/auth/signin').send(user).end(function (err, res) {
+    _chai2.default.request(_app2.default).post('/v1/auth/signin').send(user2).end(function (err, res) {
       res.should.have.status(409);
       // console.log('Response Body:', res.body);
     });
