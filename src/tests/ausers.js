@@ -61,7 +61,7 @@ describe('USER OPERATIONS', () => {
   });
 
   const user2 = {
-    email: 'johnpaul@gmail.com',
+    email: 'joely@gmail.com',
     password: 'batare',
     is_admin: 'true',
   };
