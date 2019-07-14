@@ -5,12 +5,10 @@ dotenv.config();
 
 console.log(process.env.NODE_ENV);
 
-if (process.env.NODE_ENV === undefined) {
-  next();
-}
-
 module.exports = (req, res, next) => {
-
+  if (process.env.NODE_ENV === undefined) {
+    next();
+  }
   try {
     const decode = jwt.verify(req.body.token, process.env.JWT_KEY);
     req.userData = decode;
