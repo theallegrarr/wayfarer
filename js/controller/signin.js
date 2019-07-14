@@ -22,25 +22,27 @@ function signIn(user) {
   return new Promise(function (resolve, reject) {
     var etoken = '';
     (0, _signin2.default)(user.email).then(function (result) {
-      if (result.rowCount > 0) {
-        _bcrypt2.default.compare(user.password, result.rows[0].password, function (err, response) {
-          if (response === true) {
-            etoken = _jsonwebtoken2.default.sign({
-              email: user.email,
-              id: user.id
-            }, process.env.JWT_KEY, {
-              expiresIn: '8h'
-            });
-            resolve(etoken);
-          } else {
-            etoken = 'failed';
-            resolve(etoken);
-          }
-          if (err) {
-            etoken = 'failed';
-            resolve(etoken);
-          }
-        });
+      if (result) {
+        if (result.rowCount > 0) {
+          _bcrypt2.default.compare(user.password, result.rows[0].password, function (err, response) {
+            if (response === true) {
+              etoken = _jsonwebtoken2.default.sign({
+                email: user.email,
+                id: user.id
+              }, process.env.JWT_KEY, {
+                expiresIn: '8h'
+              });
+              resolve(etoken);
+            } else {
+              etoken = 'failed';
+              resolve(etoken);
+            }
+            if (err) {
+              etoken = 'failed';
+              resolve(etoken);
+            }
+          });
+        }
       }
     }).catch(function (error) {
       reject(error);

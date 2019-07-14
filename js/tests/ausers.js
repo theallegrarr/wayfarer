@@ -67,13 +67,13 @@ describe('USER OPERATIONS', function () {
   });
 
   var user2 = {
-    email: 'johnpaul@gmail.com',
+    email: 'joely@gmail.com',
     password: 'batare',
     is_admin: 'true'
   };
 
   it('Should Fail to Sign In', function (done) {
-    _chai2.default.request(_app2.default).post('/v1/auth/signin').send(user).end(function (err, res) {
+    _chai2.default.request(_app2.default).post('/v1/auth/signin').send(user2).end(function (err, res) {
       res.should.have.status(409);
       // console.log('Response Body:', res.body);
     });
