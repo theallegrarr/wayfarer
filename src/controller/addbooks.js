@@ -1,16 +1,16 @@
-import userfind from '../model/userfind';
-import adduser from '../model/adduser';
+import tripfind from '../model/bookfind';
+import addtrip from '../model/addbook';
 
-function addUser(info) {
+function addbook(info) {
   return new Promise((resolve, reject) => {
-    userfind(info.email).then((result) => {
+    tripfind(info.trip_id).then((result) => {
       let val = '';
       if (result === 'true') {
-        val = 'failed';
+        val = 'trip exists';
         resolve(val);
       }
       if (result === 'false') {
-        adduser(info);
+        addtrip(info);
         val = 'success';
         resolve(val);
       }
@@ -20,4 +20,4 @@ function addUser(info) {
   });
 }
 
-export default addUser;
+export default addbook;

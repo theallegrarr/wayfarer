@@ -23,15 +23,21 @@ _chai2.default.use(_chaiHttp2.default);
 
 var should = _chai2.default.should();
 var user = {
-  token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhlbGdhQGdtYWlsLmNvbSIsImlkIjoiNCIsImlhdCI6MTU2Mjg1MTA1MiwiZXhwIjoxNTYyODU0NjUyfQ.GEy7mkrJrHwNYFJGIt59F-T9OyABhTaOFwk9cjsVFA0',
+  token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNhbHNva2VsQGdtYWlsLmNvbSIsImlhdCI6MTU2MzExNjQyNiwiZXhwIjoxNTYzMTQ1MjI2fQ.kfWeCcSJ4W2NEl7yr0l_8BHNgd7IokWev0S_rYtSAI8',
   user_id: 4,
   is_admin: 'true'
 };
 
 describe('TRIP Tests', function () {
-  it('Fail to get Trips', function (done) {
-    _chai2.default.request(_app2.default).get('/trips').send(user).end(function (err, res) {
-      res.should.have.status(401);
+  it('Should return all Trips', function (done) {
+    _chai2.default.request(_app2.default).get('/v1/trips').send(user).end(function (err, res) {
+      res.should.have.status(200);
+    });
+    done();
+  });
+  it('Should Create Trip', function (done) {
+    _chai2.default.request(_app2.default).post('/v1/trips').send(user).end(function (err, res) {
+      res.should.have.status(201);
     });
     done();
   });

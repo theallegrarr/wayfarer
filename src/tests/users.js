@@ -1,4 +1,4 @@
-import chai, { expect, have } from 'chai';
+import chai, { expect } from 'chai';
 import dotenv from 'dotenv';
 import chaiHttp from 'chai-http';
 import app from '../route/app';
@@ -19,30 +19,48 @@ const details = {
 
 // const signUp = request.agent(app);
 describe('USER OPERATIONS', () => {
-  it('Should add new user', (done) => {
+  it('Should not add Duplicate users', (done) => {
     chai.request(app)
-      .post('/auth/signup')
+      .post('/v1/auth/signup')
       .send(details)
       .end((err, res) => {
-        res.should.have.status(200);
+        res.should.have.status(409);
         expect(res.body).to.have.property('message');
         // console.log('Response Body:', res.body);
       });
     done();
   });
+
   const user = {
     email: 'johnpaul@gmail.com',
     password: 'batoore',
     is_admin: 'true',
   };
 
-  it('Should Fail to Sign In', (done) => {
+  it('Should Sign In', (done) => {
     chai.request(app)
-      .post('/auth/signin')
+      .post('/v1/auth/signin')
       .send(user)
       .end((err, res) => {
-        res.should.have.status(401);
+        res.should.have.status(200);
         // console.log('Response Body:', res.body);
+      });
+    done();
+  });
+
+  const user2 = {
+    email: 'johnpaul@gmail.com',
+    password: 'batare',
+    is_admin: 'true',
+  };
+
+  it('Should Fail to Sign In', (done) => {
+    chai.request(app)
+      .post('/v1/auth/signin')
+      .send(user)
+      .end((err, res) => {
+        res.should.have.status(409);
+      // console.log('Response Body:', res.body);
       });
     done();
   });

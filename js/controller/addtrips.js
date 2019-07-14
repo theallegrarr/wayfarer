@@ -4,37 +4,21 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _trips = require('../model/trips');
+var _addtrips = require('../model/addtrips');
 
-var _trips2 = _interopRequireDefault(_trips);
+var _addtrips2 = _interopRequireDefault(_addtrips);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
-function makeTrips(info) {
-
-  var value = Math.max.apply(Math, _toConsumableArray(_trips2.default.map(function (o) {
-    return o.trip_id;
-  })));
-
-  var data = {
-    trip_id: value + 1,
-    bus_id: 4,
-    origin: 'Lagos',
-    destination: 'Abuja',
-    trip_date: '01-08-2019',
-    fare: 3000.0,
-    user_id: info.user_id
-  };
-
-  if (info.is_admin === 'true') {
-    _trips2.default.push(data);
-  } else {
-    return 'failed';
-  }
-
-  return data;
+function addTrip(info) {
+  return new Promise(function (resolve, reject) {
+    (0, _addtrips2.default)(info).then(function (result) {
+      var val = result;
+      resolve(val);
+    }).catch(function (error) {
+      reject(error);
+    });
+  });
 }
 
-exports.default = makeTrips;
+exports.default = addTrip;

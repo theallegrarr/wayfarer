@@ -34,23 +34,38 @@ var details = {
 
 // const signUp = request.agent(app);
 describe('USER OPERATIONS', function () {
-  it('Should add new user', function (done) {
-    _chai2.default.request(_app2.default).post('/auth/signup').send(details).end(function (err, res) {
-      res.should.have.status(200);
+  it('Should not add Duplicate users', function (done) {
+    _chai2.default.request(_app2.default).post('/v1/auth/signup').send(details).end(function (err, res) {
+      res.should.have.status(409);
       (0, _chai.expect)(res.body).to.have.property('message');
       // console.log('Response Body:', res.body);
     });
     done();
   });
+
   var user = {
     email: 'johnpaul@gmail.com',
     password: 'batoore',
     is_admin: 'true'
   };
 
+  it('Should Sign In', function (done) {
+    _chai2.default.request(_app2.default).post('/v1/auth/signin').send(user).end(function (err, res) {
+      res.should.have.status(200);
+      // console.log('Response Body:', res.body);
+    });
+    done();
+  });
+
+  var user2 = {
+    email: 'johnpaul@gmail.com',
+    password: 'batare',
+    is_admin: 'true'
+  };
+
   it('Should Fail to Sign In', function (done) {
-    _chai2.default.request(_app2.default).post('/auth/signin').send(user).end(function (err, res) {
-      res.should.have.status(401);
+    _chai2.default.request(_app2.default).post('/v1/auth/signin').send(user).end(function (err, res) {
+      res.should.have.status(409);
       // console.log('Response Body:', res.body);
     });
     done();

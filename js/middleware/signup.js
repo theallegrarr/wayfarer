@@ -38,20 +38,21 @@ router.post('/', function (req, res) {
         is_admin: req.body.is_admin
       };
 
-      var result = (0, _adduser2.default)(data);
-      if (result === 'success') {
-        res.status(200).json({
-          message: 'Success',
-          data: data
-        });
-      } else {
-        res.status(409).json({
-          message: 'Failed',
-          error: 'Mail Already Exists'
-        });
-      }
+      (0, _adduser2.default)(data).then(function (result) {
+        if (result === 'success') {
+          res.status(201).json({
+            message: 'Success',
+            data: data
+          });
+        } else {
+          res.status(409).json({
+            message: 'Failed',
+            error: 'Mail Already Exists'
+          });
+        }
+      });
+      return 'hash complete';
     }
-    return 'hash complete';
   });
 });
 
