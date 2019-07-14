@@ -4,23 +4,21 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _trips = require('../model/trips');
+var _viewtrips = require('../model/viewtrips');
 
-var _trips2 = _interopRequireDefault(_trips);
+var _viewtrips2 = _interopRequireDefault(_viewtrips);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function viewTrips(info) {
-
-  if (info.is_admin === 'true' || info.is_admin === 'false') {
-    return _trips2.default;
-  }
-
-  var userTrips = _trips2.default.filter(function (trips) {
-    return trips.user_id === info.user_id;
+function viewtrips() {
+  return new Promise(function (resolve, reject) {
+    (0, _viewtrips2.default)().then(function (result) {
+      var val = result;
+      resolve(val);
+    }).catch(function (error) {
+      reject(error);
+    });
   });
-
-  return userTrips;
 }
 
-exports.default = viewTrips;
+exports.default = viewtrips;

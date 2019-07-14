@@ -1,26 +1,14 @@
-import trips from '../model/trips';
+import addtrip from '../model/addtrips';
 
-function makeTrips(info) {
-
-  const value = Math.max(...trips.map(o => o.trip_id));
-
-  const data = {
-    trip_id: value + 1,
-    bus_id: 4,
-    origin: 'Lagos',
-    destination: 'Abuja',
-    trip_date: '01-08-2019',
-    fare: 3000.0,
-    user_id: info.user_id,
-  };
-
-  if (info.is_admin === 'true') {
-    trips.push(data);
-  } else {
-    return ('failed');
-  }
-
-  return data;
+function addTrip(info) {
+  return new Promise((resolve, reject) => {
+    addtrip(info).then((result) => {
+      const val = result;
+      resolve(val);
+    }).catch((error) => {
+      reject(error);
+    });
+  });
 }
 
-export default makeTrips;
+export default addTrip;

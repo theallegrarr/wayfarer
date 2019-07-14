@@ -22,20 +22,21 @@ router.post('/', (req, res) => {
         is_admin: req.body.is_admin,
       };
 
-      const result = addUser(data);
-      if (result === 'success') {
-        res.status(200).json({
-          message: 'Success',
-          data,
-        });
-      } else {
-        res.status(409).json({
-          message: 'Failed',
-          error: 'Mail Already Exists',
-        });
-      }
+      addUser(data).then((result) => {
+        if (result === 'success') {
+          res.status(201).json({
+            message: 'Success',
+            data,
+          });
+        } else {
+          res.status(409).json({
+            message: 'Failed',
+            error: 'Mail Already Exists',
+          });
+        }
+      });
+      return 'hash complete';
     }
-    return 'hash complete';
   });
 });
 

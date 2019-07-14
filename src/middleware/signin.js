@@ -1,7 +1,5 @@
 // hold user requests sign-in sign-up
 import express from 'express';
-import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 import signIn from '../controller/signin';
 
@@ -15,45 +13,24 @@ router.post('/', (req, res) => {
     is_admin: req.body.is_admin,
   };
 
-  const user = signIn(data.email);
-
-  if (user) {
-    bcrypt.compare(data.password, user.password, (err, response) => {
-      if (response === true) {
-        const etoken = jwt.sign({
-          email: user.email,
-          id: user.id,
+  signIn(data).then((result) => {
+    if (result !== 'failed') {
+      res.status(200).json({
+        message: 'success',
+        data: {
+          user_id: data.id,
+          is_admin: data.is_admin,
+          token: result,
         },
-        process.env.JWT_KEY,
-        {
-          expiresIn: '1h',
-        });
-
-        res.status(200).json({
-          message: 'success',
-          data: {
-            user_id: user.id,
-            is_admin: user.is_admin,
-            token: etoken,
-          },
-        });
-      } else {
-        res.status(401.1).json({
-          message: 'wrong login parameters',
-        });
-      }
-
-      if (err) {
-        res.status(401.1).json({
-          message: 'wrong login parameters',
-        });
-      }
-    });
-  } else {
-    res.status(401.1).json({
-      message: 'wrong login parameters',
-    });
-  }
+      });
+    } else {
+      res.status(401.1).json({
+        message: 'wrong login parameters',
+      });
+    }
+  }).catch((error) => {
+    throw error;
+  });
 });
 
 export default router;

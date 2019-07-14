@@ -3,15 +3,15 @@ import bodyParser from 'body-parser';
 import logRoute from '../middleware/signin';
 import regRoute from '../middleware/signup';
 import trips from '../middleware/trips';
-import users from '../middleware/users';
+import bookings from '../middleware/bookings';
 
 const app = express();
 
 app.use(bodyParser.json());
-app.use('/auth/signin', logRoute);
-app.use('/auth/signup', regRoute);
-app.use('/trips', trips);
-app.use('/users', users);
+app.use('/v1/auth/signin', logRoute);
+app.use('/v1/auth/signup', regRoute);
+app.use('/v1/trips', trips);
+app.use('/v1/bookings', bookings);
 
 app.use('/', (req, res) => {
   res.status(200).json({

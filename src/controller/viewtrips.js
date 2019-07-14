@@ -1,14 +1,14 @@
-import trips from '../model/trips';
+import viewtrip from '../model/viewtrips';
 
-function viewTrips(info) {
-
-  if (info.is_admin === 'true' || info.is_admin === 'false') {
-    return trips;
-  }
-
-  const userTrips = trips.filter(trips => trips.user_id === info.user_id);
-
-  return userTrips;
+function viewtrips() {
+  return new Promise((resolve, reject) => {
+    viewtrip().then((result) => {
+      const val = result;
+      resolve(val);
+    }).catch((error) => {
+      reject(error);
+    });
+  });
 }
 
-export default viewTrips;
+export default viewtrips;
