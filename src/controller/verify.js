@@ -5,7 +5,7 @@ dotenv.config();
 const env = process.env.NODE_ENV || 'test';
 
 module.exports = (req, res, next) => {
-  if (env === 'test') {
+  if (process.env.NODE_ENV === 'test') {
     next();
   }
 

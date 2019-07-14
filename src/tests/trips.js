@@ -4,6 +4,7 @@ import chaiHttp from 'chai-http';
 import app from '../route/app';
 
 dotenv.config();
+process.env.NODE_ENV = 'test';
 chai.use(chaiHttp);
 
 const should = chai.should();

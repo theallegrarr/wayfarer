@@ -14,7 +14,7 @@ _dotenv2.default.config();
 var env = process.env.NODE_ENV || 'test';
 
 module.exports = function (req, res, next) {
-  if (env === 'test') {
+  if (process.env.NODE_ENV === 'test') {
     next();
   }
 
