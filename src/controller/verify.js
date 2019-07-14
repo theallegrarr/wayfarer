@@ -2,9 +2,10 @@ import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 
 dotenv.config();
+const env = process.env.NODE_ENV || 'test';
 
 module.exports = (req, res, next) => {
-  if (process.env.TEST == 2) {
+  if (env === 'test') {
     next();
   }
 

@@ -11,9 +11,10 @@ var _dotenv2 = _interopRequireDefault(_dotenv);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 _dotenv2.default.config();
+var env = process.env.NODE_ENV || 'test';
 
 module.exports = function (req, res, next) {
-  if (process.env.TEST == 2) {
+  if (env === 'test') {
     next();
   }
 
