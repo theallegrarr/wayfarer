@@ -59,4 +59,21 @@ describe('USER OPERATIONS', () => {
       });
     done();
   });
+
+  const user2 = {
+    email: 'joely@gmail.com',
+    password: 'batare',
+    is_admin: 'true',
+  };
+
+  it('Should Fail to Sign In', (done) => {
+    chai.request(app)
+      .post('/v1/auth/signin')
+      .send(user2)
+      .end((err, res) => {
+        res.should.have.status(409);
+      // console.log('Response Body:', res.body);
+      });
+    done();
+  });
 });
