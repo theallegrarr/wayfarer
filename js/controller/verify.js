@@ -15,10 +15,10 @@ _dotenv2.default.config();
 console.log(process.env.NODE_ENV);
 
 module.exports = function (req, res, next) {
-  if (process.env.NODE_ENV === undefined) {
-    next();
-  }
   try {
+    if (process.env.NODE_ENV === undefined) {
+      next();
+    }
     var decode = _jsonwebtoken2.default.verify(req.body.token, process.env.JWT_KEY);
     req.userData = decode;
     next();
