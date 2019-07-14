@@ -14,21 +14,21 @@ const user = {
 };
 
 describe('TRIP Tests', () => {
-  it('Should return all Trips', (done) => {
-    chai.request(app)
-      .get('/v1/trips')
-      .send(user)
-      .end((err, res) => {
-        res.should.have.status(200);
-      });
-    done();
-  });
   it('Should Create Trip', (done) => {
     chai.request(app)
       .post('/v1/trips')
       .send(user)
       .end((err, res) => {
         res.should.have.status(201);
+      });
+    done();
+  });
+  it('Should return all Trips', (done) => {
+    chai.request(app)
+      .get('/v1/trips')
+      .send(user)
+      .end((err, res) => {
+        res.should.have.status(200);
       });
     done();
   });

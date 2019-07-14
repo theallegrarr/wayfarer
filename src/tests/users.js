@@ -9,8 +9,8 @@ chai.use(chaiHttp);
 const should = chai.should();
 
 const details = {
-  id: 4,
-  email: 'helga@gmail.com',
+  id: 9,
+  email: 'joely@gmail.com',
   first_name: 'Helga',
   last_name: 'Paul',
   password: 'batoore',
@@ -19,6 +19,18 @@ const details = {
 
 // const signUp = request.agent(app);
 describe('USER OPERATIONS', () => {
+  it('Should add users', (done) => {
+    chai.request(app)
+      .post('/v1/auth/signup')
+      .send(details)
+      .end((err, res) => {
+        res.should.have.status(409);
+        expect(res.body).to.have.property('message');
+        // console.log('Response Body:', res.body);
+      });
+    done();
+  });
+
   it('Should not add Duplicate users', (done) => {
     chai.request(app)
       .post('/v1/auth/signup')
@@ -32,7 +44,7 @@ describe('USER OPERATIONS', () => {
   });
 
   const user = {
-    email: 'johnpaul@gmail.com',
+    email: 'joely@gmail.com',
     password: 'batoore',
     is_admin: 'true',
   };
