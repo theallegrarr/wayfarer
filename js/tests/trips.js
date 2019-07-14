@@ -20,8 +20,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 _dotenv2.default.config();
 _chai2.default.use(_chaiHttp2.default);
-process.env.NODE_ENV = 'test';
-console.log(process.env.NODE_ENV);
 
 var should = _chai2.default.should();
 var user = {

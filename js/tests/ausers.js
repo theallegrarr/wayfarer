@@ -23,9 +23,6 @@ _chai2.default.use(_chaiHttp2.default);
 
 var should = _chai2.default.should();
 
-process.env.NODE_ENV = 'test';
-console.log(process.env.NODE_ENV);
-
 var details = {
   id: 9,
   email: 'joely@gmail.com',
