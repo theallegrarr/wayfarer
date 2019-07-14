@@ -1,11 +1,11 @@
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 
-dotenv.config();
-
-console.log(process.env.NODE_ENV);
-
 module.exports = (req, res, next) => {
+  dotenv.config();
+
+  console.log(process.env.NODE_ENV);
+
   if (process.env.NODE_ENV === 'test') {
     next();
   }
