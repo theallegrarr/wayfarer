@@ -31,18 +31,6 @@ describe('USER OPERATIONS', () => {
     done();
   });
 
-  it('Should not add Duplicate users', (done) => {
-    chai.request(app)
-      .post('/v1/auth/signup')
-      .send(details)
-      .end((err, res) => {
-        res.should.have.status(409);
-        expect(res.body).to.have.property('message');
-        // console.log('Response Body:', res.body);
-      });
-    done();
-  });
-
   const user = {
     email: 'joely@gmail.com',
     password: 'batoore',
