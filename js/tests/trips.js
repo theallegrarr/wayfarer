@@ -29,15 +29,15 @@ var user = {
 };
 
 describe('TRIP Tests', function () {
-  it('Should return all Trips', function (done) {
-    _chai2.default.request(_app2.default).get('/v1/trips').send(user).end(function (err, res) {
-      res.should.have.status(200);
-    });
-    done();
-  });
   it('Should Create Trip', function (done) {
     _chai2.default.request(_app2.default).post('/v1/trips').send(user).end(function (err, res) {
       res.should.have.status(201);
+    });
+    done();
+  });
+  it('Should return all Trips', function (done) {
+    _chai2.default.request(_app2.default).get('/v1/trips').send(user).end(function (err, res) {
+      res.should.have.status(200);
     });
     done();
   });

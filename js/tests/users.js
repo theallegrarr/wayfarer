@@ -24,8 +24,8 @@ _chai2.default.use(_chaiHttp2.default);
 var should = _chai2.default.should();
 
 var details = {
-  id: 4,
-  email: 'helga@gmail.com',
+  id: 9,
+  email: 'joely@gmail.com',
   first_name: 'Helga',
   last_name: 'Paul',
   password: 'batoore',
@@ -34,6 +34,15 @@ var details = {
 
 // const signUp = request.agent(app);
 describe('USER OPERATIONS', function () {
+  it('Should add users', function (done) {
+    _chai2.default.request(_app2.default).post('/v1/auth/signup').send(details).end(function (err, res) {
+      res.should.have.status(409);
+      (0, _chai.expect)(res.body).to.have.property('message');
+      // console.log('Response Body:', res.body);
+    });
+    done();
+  });
+
   it('Should not add Duplicate users', function (done) {
     _chai2.default.request(_app2.default).post('/v1/auth/signup').send(details).end(function (err, res) {
       res.should.have.status(409);
@@ -44,7 +53,7 @@ describe('USER OPERATIONS', function () {
   });
 
   var user = {
-    email: 'johnpaul@gmail.com',
+    email: 'joely@gmail.com',
     password: 'batoore',
     is_admin: 'true'
   };
