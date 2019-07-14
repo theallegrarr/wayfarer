@@ -8,6 +8,10 @@ var _express = require('express');
 
 var _express2 = _interopRequireDefault(_express);
 
+var _dotenv = require('dotenv');
+
+var _dotenv2 = _interopRequireDefault(_dotenv);
+
 var _addtrips = require('../controller/addtrips');
 
 var _addtrips2 = _interopRequireDefault(_addtrips);
@@ -23,8 +27,9 @@ var _verify2 = _interopRequireDefault(_verify);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var router = _express2.default.Router();
+_dotenv2.default.config();
 
-router.post('/', _verify2.default, function (req, res) {
+router.post('/', process.env.NODE_ENV === 'test' || _verify2.default, function (req, res) {
   var data = req.body;
   (0, _addtrips2.default)(data).then(function (result) {
     if (result === 'failed') {
@@ -40,7 +45,7 @@ router.post('/', _verify2.default, function (req, res) {
   });
 });
 
-router.get('/', _verify2.default, function (req, res) {
+router.get('/', process.env.NODE_ENV === 'test' || _verify2.default, function (req, res) {
   (0, _viewtrips2.default)().then(function (result) {
     res.status(200).json({
       status: 'success',

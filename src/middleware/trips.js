@@ -1,11 +1,13 @@
 import express from 'express';
+import dotenv from 'dotenv';
 import addtrips from '../controller/addtrips';
 import viewtrips from '../controller/viewtrips';
 import verify from '../controller/verify';
 
 const router = express.Router();
+dotenv.config();
 
-router.post('/', verify, (req, res) => {
+router.post('/', process.env.NODE_ENV === 'test' || verify, (req, res) => {
   const data = req.body;
   addtrips(data).then((result) => {
     if (result === 'failed') {
@@ -21,7 +23,7 @@ router.post('/', verify, (req, res) => {
   });
 });
 
-router.get('/', verify, (req, res) => {
+router.get('/', process.env.NODE_ENV === 'test' || verify, (req, res) => {
   viewtrips().then((result) => {
     res.status(200).json({
       status: 'success',
