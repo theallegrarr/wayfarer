@@ -8,6 +8,9 @@ chai.use(chaiHttp);
 
 const should = chai.should();
 
+process.env.NODE_ENV = 'test';
+console.log(process.env.NODE_ENV);
+
 const details = {
   id: 9,
   email: 'joely@gmail.com',
