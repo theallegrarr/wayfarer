@@ -4,28 +4,48 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _bookfind = require('../model/bookfind');
+var _tripfind = require('../model/tripfind');
 
-var _bookfind2 = _interopRequireDefault(_bookfind);
+var _tripfind2 = _interopRequireDefault(_tripfind);
 
 var _addbook = require('../model/addbook');
 
 var _addbook2 = _interopRequireDefault(_addbook);
 
+var _bookfind = require('../model/bookfind');
+
+var _bookfind2 = _interopRequireDefault(_bookfind);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function addbook(info) {
+function addBook(info) {
+
   return new Promise(function (resolve, reject) {
-    (0, _bookfind2.default)(info.trip_id).then(function (result) {
-      var val = '';
-      if (result === 'true') {
-        val = 'trip exists';
-        resolve(val);
+    var rowcount = 0;
+    var tripInfo = '';
+    (0, _bookfind2.default)(0).then(function (result) {
+      rowcount = result.rowCount;
+    }).catch(function (err) {
+      if (err) {
+        console.log(err);
+        reject(err);
       }
+    });
+
+    (0, _tripfind2.default)(info.trip_id, 0).then(function (result) {
+      var val = '';
       if (result === 'false') {
-        (0, _addbook2.default)(info);
-        val = 'success';
+        val = 'trip is not valid';
         resolve(val);
+      } else {
+        (0, _addbook2.default)(info, rowcount).then(function (value) {
+          resolve(value);
+        }).catch(function (err) {
+          if (err) {
+            console.log(err);
+            reject(err);
+          }
+        });
       }
     }).catch(function (error) {
       reject(error);
@@ -33,4 +53,4 @@ function addbook(info) {
   });
 }
 
-exports.default = addbook;
+exports.default = addBook;

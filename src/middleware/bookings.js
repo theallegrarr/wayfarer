@@ -1,21 +1,59 @@
 import express from 'express';
 import addbooks from '../controller/addbooks';
-import verify from '../controller/verify';
+import getBooks from '../controller/getbooks';
+import verify from '../controller/verify2';
 
 const router = express.Router();
 
-router.post('/', verify, (req, res) => {
-  addbooks(req.body).then((result) => {
-    if (result === 'failed') {
+router.post('/', (req, res) => {
+  const data = req.body;
+  verify(req).then((result2) => {
+    if (result2) {
+      addbooks(data).then((result) => {
+        res.status(201).json({
+          status: 'success',
+          result,
+        });
+      });
+    } else if (result2 === false) {
       res.status(400).json({
         message: 'failed',
-        error: 'only admins can add trips',
+        error: 'user not valid',
       });
     }
-    if (result === 'success') {
-      res.status(200).json({
-        status: 'success',
-        result,
+  });
+});
+
+router.get('/', (req, res) => {
+  verify(req).then((result2) => {
+    if (result2) {
+      if (req.body.is_admin === true) {
+        getBooks(0, 0).then((result) => {
+          res.status(200).json({
+            status: 'success',
+            result,
+          });
+        }).catch((e) => {
+          if (e) {
+            console.log(e);
+          }
+        });
+      } else {
+        getBooks(0, 0, req.body.user_id).then((result) => {
+          res.status(200).json({
+            status: 'success',
+            result,
+          });
+        }).catch((e) => {
+          if (e) {
+            console.log(e);
+          }
+        });
+      }
+    } else if (result2 === false) {
+      res.status(400).json({
+        message: 'failed',
+        error: 'user not valid',
       });
     }
   });

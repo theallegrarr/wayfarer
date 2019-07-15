@@ -43,12 +43,26 @@ router.post('/', function (req, res) {
   });
 });
 
-router.get('/', _verify2.default, function (req, res) {
-  (0, _viewtrips2.default)().then(function (result) {
-    res.status(200).json({
-      status: 'success',
-      result: result
-    });
+router.get('/', function (req, res) {
+  (0, _verify2.default)(req).then(function (result2) {
+    if (result2) {
+      console.log(result2);
+      (0, _viewtrips2.default)().then(function (result) {
+        res.status(200).json({
+          status: 'success',
+          result: result
+        });
+      });
+    } else {
+      res.status(400).json({
+        message: 'failed',
+        error: 'user not valid'
+      });
+    }
+  }).catch(function (error) {
+    if (error) {
+      console.log(error);
+    }
   });
 });
 

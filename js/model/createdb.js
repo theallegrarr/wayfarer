@@ -42,7 +42,13 @@ pool.query('CREATE TABLE IF NOT EXISTS trips (trip_id INT, bus_id INT, origin VA
   }
 });
 
-pool.query('SELECT * FROM trips', function (err, res) {
+pool.query('CREATE TABLE IF NOT EXISTS bookings (id INT, user_id INT, trip_id INT, bus_id INT, trip_date DATE, seat_number INT, first_name VARCHAR, last_name VARCHAR, email VARCHAR)', function (err, res) {
+  if (err) {
+    console.log(err);
+  }
+});
+
+pool.query('SELECT * FROM bookings', function (err, res) {
   console.log(res);
 });
 

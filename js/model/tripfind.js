@@ -22,13 +22,13 @@ var pool = new _pg.Pool({
   port: process.env.DBPORT
 });
 
-function tripfind(tripId) {
+function bookfind(tripid) {
   // let value = '';
   var query = {
     // give the query a unique name
     name: 'fetch-user',
     text: 'SELECT * FROM trips WHERE trip_id = $1',
-    values: [tripId]
+    values: [tripid]
   };
   return new Promise(function (resolve, reject) {
     pool.query(query, function (error, results) {
@@ -36,16 +36,19 @@ function tripfind(tripId) {
       if (error) {
         reject(error);
       }
-      if (results.rowCount > 0) {
+      if (results) {
         val = 'true';
         resolve(val);
-      }
-      if (results.rowCount === 0) {
+      } else {
         val = 'false';
         resolve(val);
       }
     });
+  }).catch(function (error) {
+    if (error) {
+      console.log(error);
+    }
   });
 }
 
-exports.default = tripfind;
+exports.default = bookfind;
