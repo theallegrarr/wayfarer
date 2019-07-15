@@ -35,9 +35,10 @@ function addtrip() {
         origin: 'Lagos',
         destination: 'Abuja',
         trip_date: '2019-08-01',
-        fare: 2000.0
+        fare: 2000.0,
+        status: 1.0
       };
-      pool.query('INSERT INTO trips(trip_id, bus_id, origin, destination, trip_date, fare) VALUES($1, $2, $3, $4, $5, $6)', [data.id, data.bus_id, data.origin, data.destination, data.trip_date, data.fare], function (err, res) {
+      pool.query('INSERT INTO trips(trip_id, bus_id, origin, destination, trip_date, fare, status) VALUES($1, $2, $3, $4, $5, $6, $7)', [data.id, data.bus_id, data.origin, data.destination, data.trip_date, data.fare, data.status], function (err, res) {
         if (err) {
           reject(err);
         } else {

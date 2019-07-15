@@ -27,8 +27,8 @@ function patch(tripid) {
   var query = {
     // give the query a unique name
     name: 'fetch-user',
-    text: 'DELETE FROM trips WHERE trip_id=$1',
-    values: [tripid]
+    text: 'UPDATE trips SET status=$2 WHERE trip_id=$1',
+    values: [tripid, 0]
   };
   return new Promise(function (resolve, reject) {
     pool.query(query, function (error, results) {
