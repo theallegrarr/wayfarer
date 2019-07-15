@@ -7,3 +7,5 @@ services:
 addons:
   jwt:
     secure: secret
+env:
+- JWT_KEY=secret

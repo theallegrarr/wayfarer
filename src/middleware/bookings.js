@@ -1,5 +1,6 @@
 import express from 'express';
 import addbooks from '../controller/addbooks';
+import deletebook from '../controller/deletebook';
 import getBooks from '../controller/getbooks';
 import verify from '../controller/verify2';
 
@@ -17,6 +18,34 @@ router.post('/', (req, res) => {
       });
     } else if (result2 === false) {
       res.status(400).json({
+        message: 'failed',
+        error: 'user not valid',
+      });
+    }
+  });
+});
+
+router.delete('/:id', (req, res) => {
+  const data = req.body;
+  verify(req).then((result2) => {
+    if (result2) {
+      deletebook(req.params.id, req.body).then((result) => {
+        if (result === 'success') {
+          res.status(201).json({
+            status: 'success',
+            data: {
+              message: 'Booking deleted successfully',
+            },
+          });
+        } else {
+          res.status(401).json({
+            status: 'failed',
+            result,
+          });
+        }
+      });
+    } else if (result2 === false) {
+      res.status(401).json({
         message: 'failed',
         error: 'user not valid',
       });

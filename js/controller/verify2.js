@@ -20,6 +20,7 @@ function verify(req) {
   return new Promise(function (resolve, reject) {
     var decode = _jsonwebtoken2.default.verify(req.body.token, process.env.JWT_KEY);
     var data = decode;
+    console.log(decode);
     resolve(data);
   }).catch(function (error) {
     console.log(error);

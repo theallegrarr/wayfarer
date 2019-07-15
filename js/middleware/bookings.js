@@ -12,6 +12,10 @@ var _addbooks = require('../controller/addbooks');
 
 var _addbooks2 = _interopRequireDefault(_addbooks);
 
+var _deletebook = require('../controller/deletebook');
+
+var _deletebook2 = _interopRequireDefault(_deletebook);
+
 var _getbooks = require('../controller/getbooks');
 
 var _getbooks2 = _interopRequireDefault(_getbooks);
@@ -36,6 +40,34 @@ router.post('/', function (req, res) {
       });
     } else if (result2 === false) {
       res.status(400).json({
+        message: 'failed',
+        error: 'user not valid'
+      });
+    }
+  });
+});
+
+router.delete('/:id', function (req, res) {
+  var data = req.body;
+  (0, _verify2.default)(req).then(function (result2) {
+    if (result2) {
+      (0, _deletebook2.default)(req.params.id, req.body).then(function (result) {
+        if (result === 'success') {
+          res.status(201).json({
+            status: 'success',
+            data: {
+              message: 'Booking deleted successfully'
+            }
+          });
+        } else {
+          res.status(401).json({
+            status: 'failed',
+            result: result
+          });
+        }
+      });
+    } else if (result2 === false) {
+      res.status(401).json({
         message: 'failed',
         error: 'user not valid'
       });

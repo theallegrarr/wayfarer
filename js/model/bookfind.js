@@ -24,7 +24,7 @@ var pool = new _pg.Pool({
 
 function bookfind(id, tripId, userId) {
   var query = '';
-  if (id !== 0) {
+  if (id >= 0) {
     query = {
       // give the query a unique name
       name: 'fetch-booking',
@@ -32,7 +32,7 @@ function bookfind(id, tripId, userId) {
       values: [id]
     };
   }
-  if (tripId !== 0 && id === 0) {
+  if (tripId >= 0 && id === 0) {
     query = {
       // give the query a unique name
       name: 'fetch-booking',

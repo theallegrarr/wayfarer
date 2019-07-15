@@ -14,7 +14,7 @@ const details = {
   first_name: 'Helga',
   last_name: 'Paul',
   password: 'batoore',
-  is_admin: 'true',
+  is_admin: true,
 };
 
 // const signUp = request.agent(app);
@@ -51,7 +51,7 @@ describe('USER OPERATIONS', () => {
   const user2 = {
     email: 'joely@gmail.com',
     password: 'batare',
-    is_admin: 'true',
+    is_admin: true,
   };
 
   it('Should Fail to Sign In', (done) => {
