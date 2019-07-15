@@ -25,7 +25,7 @@ var should = _chai2.default.should();
 
 var details = {
   id: 9,
-  email: 'joely@gmail.com',
+  email: 'kempo2@gmail.com',
   first_name: 'Helga',
   last_name: 'Paul',
   password: 'batoore',
@@ -36,7 +36,7 @@ var details = {
 describe('USER OPERATIONS', function () {
   it('Should add users', function (done) {
     _chai2.default.request(_app2.default).post('/v1/auth/signup').send(details).end(function (err, res) {
-      res.should.have.status(409);
+      res.should.have.status(201);
       (0, _chai.expect)(res.body).to.have.property('message');
       // console.log('Response Body:', res.body);
     });
@@ -65,7 +65,7 @@ describe('USER OPERATIONS', function () {
 
   it('Should Fail to Sign In', function (done) {
     _chai2.default.request(_app2.default).post('/v1/auth/signin').send(user2).end(function (err, res) {
-      res.should.have.status(409);
+      res.should.have.status(401);
       // console.log('Response Body:', res.body);
     });
     done();

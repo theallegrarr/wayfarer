@@ -23,7 +23,7 @@ _chai2.default.use(_chaiHttp2.default);
 
 var should = _chai2.default.should();
 var user = {
-  token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNhbHNva2VsQGdtYWlsLmNvbSIsImlhdCI6MTU2MzExNjQyNiwiZXhwIjoxNTYzMTQ1MjI2fQ.kfWeCcSJ4W2NEl7yr0l_8BHNgd7IokWev0S_rYtSAI8',
+  token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNhbHNva2VsQGdtYWlsLmNvbSIsImlhdCI6MTU2MzE3OTMzNiwiZXhwIjoxNTYzMjA4MTM2fQ.BqC4ITBnS4aIaLFq4gh9rRn0YUp0XJcZQgatKgmcIec',
   user_id: 4,
   is_admin: 'true'
 };
