@@ -19,7 +19,7 @@ describe('TRIP Tests', () => {
       .post('/v1/trips')
       .send(user)
       .end((err, res) => {
-        res.should.have.status(401);
+        res.should.have.status(400);
       });
     done();
   });
@@ -28,7 +28,7 @@ describe('TRIP Tests', () => {
       .get('/v1/trips')
       .send(user)
       .end((err, res) => {
-        res.should.have.status(401);
+        res.should.have.status(400);
       });
     done();
   });
