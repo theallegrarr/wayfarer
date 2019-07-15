@@ -24,7 +24,7 @@ describe('USER OPERATIONS', () => {
       .post('/v1/auth/signup')
       .send(details)
       .end((err, res) => {
-        res.should.have.status(409);
+        res.should.have.status(201);
         expect(res.body).to.have.property('message');
         // console.log('Response Body:', res.body);
       });
