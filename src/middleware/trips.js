@@ -1,23 +1,26 @@
 import express from 'express';
 import addtrips from '../controller/addtrips';
 import viewtrips from '../controller/viewtrips';
-import verify from '../controller/verify';
+import verify from '../controller/verify2';
 
 const router = express.Router();
 
-router.post('/', verify, (req, res) => {
+router.post('/', (req, res) => {
   const data = req.body;
-  addtrips(data).then((result) => {
-    if (result === 'failed') {
+  verify(req).then((result2) => {
+    if (result2 === true) {
+      addtrips(data).then((result) => {
+        res.status(201).json({
+          status: 'success',
+          result,
+        });
+      });
+    } else if (result2 === false) {
       res.status(400).json({
         message: 'failed',
-        error: 'only admins can add trips',
+        error: 'user not valid',
       });
     }
-    res.status(201).json({
-      status: 'success',
-      result,
-    });
   });
 });
 

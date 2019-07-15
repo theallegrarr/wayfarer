@@ -16,7 +16,7 @@ var _viewtrips = require('../controller/viewtrips');
 
 var _viewtrips2 = _interopRequireDefault(_viewtrips);
 
-var _verify = require('../controller/verify');
+var _verify = require('../controller/verify2');
 
 var _verify2 = _interopRequireDefault(_verify);
 
@@ -24,19 +24,22 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var router = _express2.default.Router();
 
-router.post('/', _verify2.default, function (req, res) {
+router.post('/', function (req, res) {
   var data = req.body;
-  (0, _addtrips2.default)(data).then(function (result) {
-    if (result === 'failed') {
+  (0, _verify2.default)(req).then(function (result2) {
+    if (result2 === true) {
+      (0, _addtrips2.default)(data).then(function (result) {
+        res.status(201).json({
+          status: 'success',
+          result: result
+        });
+      });
+    } else if (result2 === false) {
       res.status(400).json({
         message: 'failed',
-        error: 'only admins can add trips'
+        error: 'user not valid'
       });
     }
-    res.status(201).json({
-      status: 'success',
-      result: result
-    });
   });
 });
 

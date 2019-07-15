@@ -10,7 +10,7 @@ const should = chai.should();
 
 const details = {
   id: 9,
-  email: 'joely@gmail.com',
+  email: 'kempo2@gmail.com',
   first_name: 'Helga',
   last_name: 'Paul',
   password: 'batoore',
@@ -24,7 +24,7 @@ describe('USER OPERATIONS', () => {
       .post('/v1/auth/signup')
       .send(details)
       .end((err, res) => {
-        res.should.have.status(409);
+        res.should.have.status(201);
         expect(res.body).to.have.property('message');
         // console.log('Response Body:', res.body);
       });
@@ -59,7 +59,7 @@ describe('USER OPERATIONS', () => {
       .post('/v1/auth/signin')
       .send(user2)
       .end((err, res) => {
-        res.should.have.status(409);
+        res.should.have.status(401);
       // console.log('Response Body:', res.body);
       });
     done();
