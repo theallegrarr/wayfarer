@@ -23,7 +23,7 @@ function verify(req) {
     console.log(data);
     resolve(data);
   }).catch(function (error) {
-    reject(error);
+    console.log(error);
   });
 }
 

@@ -10,7 +10,7 @@ function verify(req) {
     console.log(data);
     resolve(data);
   }).catch((error) => {
-    reject(error);
+    console.log(error);
   });
 }
 
