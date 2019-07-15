@@ -36,7 +36,7 @@ pool.query('CREATE TABLE IF NOT EXISTS buses (id INT, number_plate INT, manufact
   }
 });
 
-pool.query('CREATE TABLE IF NOT EXISTS trips (trip_id INT, bus_id INT, origin VARCHAR, destination VARCHAR, trip_date DATE, fare FLOAT)', function (err, res) {
+pool.query('CREATE TABLE IF NOT EXISTS trips (trip_id INT, bus_id INT, origin VARCHAR, destination VARCHAR, trip_date DATE, fare FLOAT, status FLOAT)', function (err, res) {
   if (err) {
     console.log(err);
   }
