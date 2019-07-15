@@ -7,6 +7,7 @@ function verify(req) {
   return new Promise((resolve, reject) => {
     const decode = jwt.verify(req.body.token, process.env.JWT_KEY);
     const data = decode;
+    console.log(decode);
     resolve(data);
   }).catch((error) => {
     console.log(error);

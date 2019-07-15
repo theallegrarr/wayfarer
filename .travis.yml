@@ -7,3 +7,12 @@ services:
 addons:
   jwt:
     secure: secret
+env:
+- NODE_ENV=test
+- JWT_KEY=secret
+- TEST=0
+- DBUSER=postgres
+- DBHOST=localhost
+- DBASE=postgres
+- DBPASS=ludacris
+- DBPORT=5432

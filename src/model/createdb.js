@@ -41,8 +41,4 @@ pool.query('CREATE TABLE IF NOT EXISTS bookings (id INT, user_id INT, trip_id IN
   }
 });
 
-pool.query('SELECT * FROM bookings', (err, res) => {
-  console.log(res);
-});
-
 pool.end();
