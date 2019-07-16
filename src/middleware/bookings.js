@@ -62,7 +62,8 @@ router.get('/', (req, res) => {
   verify(req).then((result2) => {
     if (result2) {
       if (req.body.is_admin === true) {
-        getBooks(0, 0).then((data) => {
+        getBooks(0, 0, -1).then((data) => {
+          console.log(data);
           if (data) {
             res.status(200).json({
               status: 'success',

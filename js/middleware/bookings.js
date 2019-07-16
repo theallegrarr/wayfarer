@@ -84,7 +84,8 @@ router.get('/', function (req, res) {
   (0, _verify2.default)(req).then(function (result2) {
     if (result2) {
       if (req.body.is_admin === true) {
-        (0, _getbooks2.default)(0, 0).then(function (data) {
+        (0, _getbooks2.default)(0, 0, -1).then(function (data) {
+          console.log(data);
           if (data) {
             res.status(200).json({
               status: 'success',
