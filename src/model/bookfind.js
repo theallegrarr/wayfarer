@@ -13,7 +13,7 @@ const pool = new Pool({
 
 function bookfind(id, tripId, userId) {
   let query = '';
-  if (id >= 0) {
+  if (id > 0) {
     query = {
     // give the query a unique name
       name: 'fetch-booking',
@@ -51,14 +51,20 @@ function bookfind(id, tripId, userId) {
       if (error) {
         reject(error);
       }
-      if (results.rowCount > 0) {
-        val = results;
-        resolve(val);
+      if (results) {
+        if (results.rowCount > 0) {
+          val = results;
+          resolve(val);
+        } else {
+          val = 0;
+          resolve(val);
+        }
+        if (results.rowCount === 0) {
+          val = false;
+          resolve(val);
+        }
       }
-      if (results.rowCount === 0) {
-        val = false;
-        resolve(val);
-      }
+      reject(error);
     });
   });
 }

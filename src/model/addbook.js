@@ -34,6 +34,7 @@ function getTripInfo(tripId) {
         resolve(data);
         reject(err);
       } else {
+        resolve('invalid id');
         reject(err);
       }
     });
@@ -48,21 +49,28 @@ function getSeats(tripId) {
         resolve(data);
         reject(err);
       } else {
+        const data = 0;
+        resolve(data);
         reject(err);
       }
     });
   }).catch(err => err);
 }
 
-function addbook(info, rowc, xinfo) {
+function addbook(info, rowc) {
   let data = '';
-  const rowcount = rowc + 1;
+  let rowcount = 0;
+  let seat = 0;
   return new Promise((resolve, reject) => {
     getUserInfo(info).then((result) => {
       getTripInfo(info.trip_id).then((result2) => {
         getSeats(info.trip_id).then((result3) => {
           const tripInfo = result2;
-          const seat = result3 + 1;
+          if (result2 === 'invalid id') {
+            resolve('invalid id');
+          }
+          seat = result3 + 1;
+          rowcount = rowc + 1
           // const bookId = result - 1;
           data = {
             id: rowcount,

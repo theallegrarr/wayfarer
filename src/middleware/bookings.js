@@ -11,6 +11,12 @@ router.post('/', (req, res) => {
   verify(req).then((result2) => {
     if (result2) {
       addbooks(data).then((result) => {
+        if (result === 'invalid id') {
+          res.status(400).json({
+            status: 'error',
+            message: 'trip does not exist',
+          });
+        }
         res.status(201).json({
           status: 'success',
           result,
@@ -31,7 +37,7 @@ router.delete('/:id', (req, res) => {
     if (result2) {
       deletebook(req.params.id, req.body).then((result) => {
         if (result === 'success') {
-          res.status(201).json({
+          res.status(200).json({
             status: 'success',
             data: {
               message: 'Booking deleted successfully',
@@ -55,6 +61,7 @@ router.delete('/:id', (req, res) => {
 
 router.get('/', (req, res) => {
   verify(req).then((result2) => {
+    console.log(result2);
     if (result2) {
       if (req.body.is_admin === true) {
         getBooks(0, 0).then((result) => {

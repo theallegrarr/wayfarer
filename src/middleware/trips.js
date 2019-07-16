@@ -30,7 +30,7 @@ router.patch('/:tripId', (req, res) => {
     if (result2 && req.body.is_admin === true) {
       patchTrip(req.params.tripId).then((result) => {
         if (result === 'success') {
-          res.status(201).json({
+          res.status(200).json({
             status: 'success',
             data: {
               message: 'Trip canceled successfully',

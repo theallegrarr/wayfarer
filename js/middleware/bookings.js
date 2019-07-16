@@ -33,6 +33,12 @@ router.post('/', function (req, res) {
   (0, _verify2.default)(req).then(function (result2) {
     if (result2) {
       (0, _addbooks2.default)(data).then(function (result) {
+        if (result === 'invalid id') {
+          res.status(400).json({
+            status: 'error',
+            message: 'trip does not exist'
+          });
+        }
         res.status(201).json({
           status: 'success',
           result: result
@@ -53,7 +59,7 @@ router.delete('/:id', function (req, res) {
     if (result2) {
       (0, _deletebook2.default)(req.params.id, req.body).then(function (result) {
         if (result === 'success') {
-          res.status(201).json({
+          res.status(200).json({
             status: 'success',
             data: {
               message: 'Booking deleted successfully'
@@ -77,6 +83,7 @@ router.delete('/:id', function (req, res) {
 
 router.get('/', function (req, res) {
   (0, _verify2.default)(req).then(function (result2) {
+    console.log(result2);
     if (result2) {
       if (req.body.is_admin === true) {
         (0, _getbooks2.default)(0, 0).then(function (result) {

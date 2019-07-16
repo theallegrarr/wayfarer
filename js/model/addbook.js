@@ -50,6 +50,7 @@ function getTripInfo(tripId) {
         resolve(data);
         reject(err);
       } else {
+        resolve('invalid id');
         reject(err);
       }
     });
@@ -66,6 +67,8 @@ function getSeats(tripId) {
         resolve(data);
         reject(err);
       } else {
+        var _data = 0;
+        resolve(_data);
         reject(err);
       }
     });
@@ -74,15 +77,20 @@ function getSeats(tripId) {
   });
 }
 
-function addbook(info, rowc, xinfo) {
+function addbook(info, rowc) {
   var data = '';
-  var rowcount = rowc + 1;
+  var rowcount = 0;
+  var seat = 0;
   return new Promise(function (resolve, reject) {
     getUserInfo(info).then(function (result) {
       getTripInfo(info.trip_id).then(function (result2) {
         getSeats(info.trip_id).then(function (result3) {
           var tripInfo = result2;
-          var seat = result3 + 1;
+          if (result2 === 'invalid id') {
+            resolve('invalid id');
+          }
+          seat = result3 + 1;
+          rowcount = rowc + 1;
           // const bookId = result - 1;
           data = {
             id: rowcount,

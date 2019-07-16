@@ -21,34 +21,40 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function addBook(info) {
 
   return new Promise(function (resolve, reject) {
-    var rowcount = 0;
-    var tripInfo = '';
+    var rowcount = -1;
+
     (0, _bookfind2.default)(0).then(function (result) {
-      rowcount = result.rowCount;
+      if (result) {
+        rowcount = result.rowCount;
+      } else {
+        rowcount = 0;
+      }
+      (0, _tripfind2.default)(info.trip_id, 0).then(function (result) {
+        var val = '';
+        if (result === 'false') {
+          val = 'trip is not valid';
+          resolve(val);
+        } else {
+          (0, _addbook2.default)(info, rowcount).then(function (value) {
+            if (value === 'invalid id') {
+              resolve('invalid id');
+            }
+            resolve(value);
+          }).catch(function (err) {
+            if (err) {
+              console.log(err);
+              reject(err);
+            }
+          });
+        }
+      }).catch(function (error) {
+        reject(error);
+      });
     }).catch(function (err) {
       if (err) {
         console.log(err);
         reject(err);
       }
-    });
-
-    (0, _tripfind2.default)(info.trip_id, 0).then(function (result) {
-      var val = '';
-      if (result === 'false') {
-        val = 'trip is not valid';
-        resolve(val);
-      } else {
-        (0, _addbook2.default)(info, rowcount).then(function (value) {
-          resolve(value);
-        }).catch(function (err) {
-          if (err) {
-            console.log(err);
-            reject(err);
-          }
-        });
-      }
-    }).catch(function (error) {
-      reject(error);
     });
   });
 }

@@ -11,7 +11,8 @@
     "prestart": "node ./js/model/createdb.js",
     "start": "node ./js/server.js",
     "filefix": "eslint --fix ./model/trips.js",
-    "dbase": "node ./js/model/createdb.js"
+    "dbase": "node ./js/model/createdb.js",
+    "heroku-postbuild": "npm install --production"
   },
   "eslintIgnore": [
     "-d js"
