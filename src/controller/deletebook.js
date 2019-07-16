@@ -7,10 +7,12 @@ function deletebook(info, user, userid) {
     console.log(info, user, userid);
     bookfind(info, -1, -1).then((result) => {
       if (result.rowCount > 0) {
+        
         if (result.rows[0].user_id !== userid) {
           console.log(result.rows[0].user_id);
           resolve('not authorized to delete this booking');
         }
+
         remove(info).then((result2) => {
           resolve('success');
         }).catch((err) => {
@@ -18,13 +20,14 @@ function deletebook(info, user, userid) {
             console.log(err);
             reject(err);
           }
+
         });
       } else {
         resolve('booking does not exist');
       }
     }).catch((err) => {
       if (err) {
-        console.log(err);
+        console.log('error 1:',err);
         reject(err);
       }
     });

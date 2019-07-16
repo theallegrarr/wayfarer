@@ -68,6 +68,10 @@ function bookfind(id, tripId, userId) {
       }
       reject(error);
     });
+  }).catch((error) => {
+    if (error) {
+      console.log(error);
+    }
   });
 }
 

@@ -20,10 +20,12 @@ function deletebook(info, user, userid) {
     console.log(info, user, userid);
     (0, _bookfind2.default)(info, -1, -1).then(function (result) {
       if (result.rowCount > 0) {
+
         if (result.rows[0].user_id !== userid) {
           console.log(result.rows[0].user_id);
           resolve('not authorized to delete this booking');
         }
+
         (0, _deletebook2.default)(info).then(function (result2) {
           resolve('success');
         }).catch(function (err) {
@@ -37,7 +39,7 @@ function deletebook(info, user, userid) {
       }
     }).catch(function (err) {
       if (err) {
-        console.log(err);
+        console.log('error 1:', err);
         reject(err);
       }
     });

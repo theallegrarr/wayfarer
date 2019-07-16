@@ -79,6 +79,10 @@ function bookfind(id, tripId, userId) {
       }
       reject(error);
     });
+  }).catch(function (error) {
+    if (error) {
+      console.log(error);
+    }
   });
 }
 
