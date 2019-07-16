@@ -26,16 +26,16 @@ var pool = new _pg.Pool({
   port: process.env.DBPORT
 });
 
-function addtrip() {
+function addtrip(req) {
   return new Promise(function (resolve, reject) {
     (0, _validId2.default)().then(function (result) {
       var data = {
         id: result,
-        bus_id: 4,
-        origin: 'Lagos',
-        destination: 'Abuja',
-        trip_date: '2019-08-01',
-        fare: 2000.0,
+        bus_id: req.bus_id,
+        origin: req.origin,
+        destination: req.destination,
+        trip_date: req.trip_date,
+        fare: req.fare,
         status: 1.0
       };
       pool.query('INSERT INTO trips(trip_id, bus_id, origin, destination, trip_date, fare, status) VALUES($1, $2, $3, $4, $5, $6, $7)', [data.id, data.bus_id, data.origin, data.destination, data.trip_date, data.fare, data.status], function (err, res) {
