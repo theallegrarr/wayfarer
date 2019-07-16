@@ -21,6 +21,7 @@ router.post('/', (req, res) => {
       error: 'wrong login parameters',
     });
   }
+  console.log(validEmail,' ',data);
   signIn(data).then((result) => {
     if (result !== 'failed') {
       console.log(result,' ',data);

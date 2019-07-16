@@ -40,6 +40,7 @@ router.post('/', function (req, res) {
       error: 'wrong login parameters'
     });
   }
+  console.log(validEmail, ' ', data);
   (0, _signin2.default)(data).then(function (result) {
     if (result !== 'failed') {
       console.log(result, ' ', data);
