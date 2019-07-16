@@ -26,6 +26,8 @@ function viewtrips() {
       if (results.rowCount > 0) {
         const val = results.rows;
         resolve(val);
+      } else {
+        resolve('failed');
       }
     });
   });

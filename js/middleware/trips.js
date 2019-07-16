@@ -80,10 +80,24 @@ router.get('/', function (req, res) {
     if (result2) {
       console.log(result2);
       (0, _viewtrips2.default)().then(function (result) {
-        res.status(200).json({
-          status: 'success',
-          result: result
-        });
+        if (result !== 'failed') {
+          res.status(200).json({
+            status: 'success',
+            result: result
+          });
+        } else {
+          res.status(400).json({
+            status: 'failed',
+            error: 'no trips found'
+          });
+        }
+      }).catch(function (error) {
+        if (error) {
+          res.status(400).json({
+            status: 'failed',
+            error: error
+          });
+        }
       });
     } else {
       res.status(400).json({

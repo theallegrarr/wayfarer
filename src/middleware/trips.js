@@ -58,10 +58,24 @@ router.get('/', (req, res) => {
     if (result2) {
       console.log(result2);
       viewtrips().then((result) => {
-        res.status(200).json({
-          status: 'success',
-          result,
-        });
+        if (result !== 'failed') {
+          res.status(200).json({
+            status: 'success',
+            result,
+          });
+        } else {
+          res.status(400).json({
+            status: 'failed',
+            error: 'no trips found',
+          });
+        }
+      }).catch((error) => {
+        if (error) {
+          res.status(400).json({
+            status: 'failed',
+            error,
+          });
+        }
       });
     } else {
       res.status(400).json({

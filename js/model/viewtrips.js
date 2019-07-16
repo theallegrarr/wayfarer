@@ -37,6 +37,8 @@ function viewtrips() {
       if (results.rowCount > 0) {
         var val = results.rows;
         resolve(val);
+      } else {
+        resolve('failed');
       }
     });
   });
