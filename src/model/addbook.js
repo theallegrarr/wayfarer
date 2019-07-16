@@ -44,7 +44,7 @@ function getTripInfo(tripId) {
 
 function getSeats(tripId) {
   return new Promise((resolve, reject) => {
-    pool.query('SELECT * FROM bookings WHERE trip_id=$1', [tripId], (err, res) => {
+    pool.query('SELECT * FROM bbookings WHERE trip_id=$1', [tripId], (err, res) => {
       if (res.rowCount > 0) {
         const data = res.rowCount;
         resolve(data);
@@ -88,7 +88,7 @@ function addbook(info, rowc) {
             email: result.email,
           };
 
-          pool.query('INSERT INTO bookings(id, user_id, trip_id, bus_id, trip_date, seat_number, first_name, last_name, email) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9)', [data.id, data.user_id, data.trip_id, data.bus_id, data.trip_date, data.seat_number, data.first_name, data.last_name, data.email], (err, res) => {
+          pool.query('INSERT INTO bbookings(id, user_id, trip_id, bus_id, trip_date, seat_number, first_name, last_name, email) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9)', [data.id, data.user_id, data.trip_id, data.bus_id, data.trip_date, data.seat_number, data.first_name, data.last_name, data.email], (err, res) => {
             resolve(data);
           });
         }).catch((err) => {

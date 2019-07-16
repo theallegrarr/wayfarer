@@ -17,7 +17,7 @@ function bookfind(id, tripId, userId) {
     query = {
     // give the query a unique name
       name: 'fetch-booking',
-      text: 'SELECT * FROM bookings WHERE id = $1',
+      text: 'SELECT * FROM bbookings WHERE id = $1',
       values: [id],
     };
   }
@@ -25,7 +25,7 @@ function bookfind(id, tripId, userId) {
     query = {
     // give the query a unique name
       name: 'fetch-booking',
-      text: 'SELECT * FROM bookings WHERE trip_id = $1',
+      text: 'SELECT * FROM bbookings WHERE trip_id = $1',
       values: [tripId],
     };
   }
@@ -33,14 +33,14 @@ function bookfind(id, tripId, userId) {
     query = {
       // give the query a unique name
       name: 'fetch-booking',
-      text: 'SELECT * FROM bookings',
+      text: 'SELECT * FROM bbookings',
     };
   }
   if (userId > 0) {
     query = {
       // give the query a unique name
       name: 'fetch-booking',
-      text: 'SELECT * FROM bookings WHERE user_id = $1',
+      text: 'SELECT * FROM bbookings WHERE user_id = $1',
       values: [userId],
     };
   }

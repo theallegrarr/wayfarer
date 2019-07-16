@@ -29,7 +29,7 @@ pool.query('CREATE TABLE IF NOT EXISTS btrips (id INT, bus_id INT, origin VARCHA
   }
 });
 
-pool.query('CREATE TABLE IF NOT EXISTS bookings (id INT, user_id INT, trip_id INT, bus_id INT, trip_date DATE, seat_number INT, first_name VARCHAR, last_name VARCHAR, email VARCHAR)', (err, res) => {
+pool.query('CREATE TABLE IF NOT EXISTS bbookings (id INT, user_id INT, trip_id INT, bus_id INT, trip_date DATE, seat_number INT, first_name VARCHAR, last_name VARCHAR, email VARCHAR)', (err, res) => {
   if (err) {
     console.log(err);
   }
