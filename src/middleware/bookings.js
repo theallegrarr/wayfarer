@@ -7,11 +7,11 @@ import verify from '../controller/verify2';
 const router = express.Router();
 
 router.post('/', (req, res) => {
-  const data = req.body;
+
   verify(req).then((result2) => {
     if (result2) {
-      addbooks(data).then((result) => {
-        if (result === 'invalid id') {
+      addbooks(req.body).then((data) => {
+        if (data === 'invalid id') {
           res.status(400).json({
             status: 'error',
             message: 'trip does not exist',
@@ -19,12 +19,12 @@ router.post('/', (req, res) => {
         }
         res.status(201).json({
           status: 'success',
-          result,
+          data,
         });
       });
     } else if (result2 === false) {
       res.status(400).json({
-        message: 'failed',
+        status: 'error',
         error: 'user not valid',
       });
     }
@@ -32,7 +32,6 @@ router.post('/', (req, res) => {
 });
 
 router.delete('/:id', (req, res) => {
-  const data = req.body;
   verify(req).then((result2) => {
     if (result2) {
       deletebook(req.params.id, req.body).then((result) => {
@@ -45,14 +44,14 @@ router.delete('/:id', (req, res) => {
           });
         } else {
           res.status(401).json({
-            status: 'failed',
-            result,
+            status: 'error',
+            error: result,
           });
         }
       });
     } else if (result2 === false) {
       res.status(401).json({
-        message: 'failed',
+        status: 'error',
         error: 'user not valid',
       });
     }
@@ -61,14 +60,13 @@ router.delete('/:id', (req, res) => {
 
 router.get('/', (req, res) => {
   verify(req).then((result2) => {
-    console.log(result2);
     if (result2) {
       if (req.body.is_admin === true) {
-        getBooks(0, 0).then((result) => {
-          if (result) {
+        getBooks(0, 0).then((data) => {
+          if (data) {
             res.status(200).json({
               status: 'success',
-              result,
+              data,
             });
           } else {
             res.status(400).json({
@@ -82,10 +80,10 @@ router.get('/', (req, res) => {
           }
         });
       } else {
-        getBooks(0, 0, req.body.user_id).then((result) => {
+        getBooks(0, 0, req.body.user_id).then((data) => {
           res.status(200).json({
             status: 'success',
-            result,
+            data,
           });
         }).catch((e) => {
           if (e) {
@@ -95,7 +93,7 @@ router.get('/', (req, res) => {
       }
     } else if (result2 === false) {
       res.status(400).json({
-        message: 'failed',
+        status: 'error',
         error: 'user not valid',
       });
     }

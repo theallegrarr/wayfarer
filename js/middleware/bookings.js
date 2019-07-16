@@ -29,11 +29,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var router = _express2.default.Router();
 
 router.post('/', function (req, res) {
-  var data = req.body;
+
   (0, _verify2.default)(req).then(function (result2) {
     if (result2) {
-      (0, _addbooks2.default)(data).then(function (result) {
-        if (result === 'invalid id') {
+      (0, _addbooks2.default)(req.body).then(function (data) {
+        if (data === 'invalid id') {
           res.status(400).json({
             status: 'error',
             message: 'trip does not exist'
@@ -41,12 +41,12 @@ router.post('/', function (req, res) {
         }
         res.status(201).json({
           status: 'success',
-          result: result
+          data: data
         });
       });
     } else if (result2 === false) {
       res.status(400).json({
-        message: 'failed',
+        status: 'error',
         error: 'user not valid'
       });
     }
@@ -54,7 +54,6 @@ router.post('/', function (req, res) {
 });
 
 router.delete('/:id', function (req, res) {
-  var data = req.body;
   (0, _verify2.default)(req).then(function (result2) {
     if (result2) {
       (0, _deletebook2.default)(req.params.id, req.body).then(function (result) {
@@ -67,14 +66,14 @@ router.delete('/:id', function (req, res) {
           });
         } else {
           res.status(401).json({
-            status: 'failed',
-            result: result
+            status: 'error',
+            error: result
           });
         }
       });
     } else if (result2 === false) {
       res.status(401).json({
-        message: 'failed',
+        status: 'error',
         error: 'user not valid'
       });
     }
@@ -83,14 +82,13 @@ router.delete('/:id', function (req, res) {
 
 router.get('/', function (req, res) {
   (0, _verify2.default)(req).then(function (result2) {
-    console.log(result2);
     if (result2) {
       if (req.body.is_admin === true) {
-        (0, _getbooks2.default)(0, 0).then(function (result) {
-          if (result) {
+        (0, _getbooks2.default)(0, 0).then(function (data) {
+          if (data) {
             res.status(200).json({
               status: 'success',
-              result: result
+              data: data
             });
           } else {
             res.status(400).json({
@@ -104,10 +102,10 @@ router.get('/', function (req, res) {
           }
         });
       } else {
-        (0, _getbooks2.default)(0, 0, req.body.user_id).then(function (result) {
+        (0, _getbooks2.default)(0, 0, req.body.user_id).then(function (data) {
           res.status(200).json({
             status: 'success',
-            result: result
+            data: data
           });
         }).catch(function (e) {
           if (e) {
@@ -117,7 +115,7 @@ router.get('/', function (req, res) {
       }
     } else if (result2 === false) {
       res.status(400).json({
-        message: 'failed',
+        status: 'error',
         error: 'user not valid'
       });
     }

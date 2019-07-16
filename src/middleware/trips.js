@@ -11,15 +11,15 @@ router.post('/', (req, res) => {
   console.log(data.body);
   verify(req).then((result2) => {
     if (result2) {
-      addtrips(data).then((result) => {
+      addtrips(data).then((data) => {
         res.status(201).json({
           status: 'success',
-          result,
+          data,
         });
       });
     } else if (result2 === false) {
       res.status(400).json({
-        message: 'failed',
+        status: 'error',
         error: 'user not valid',
       });
     }
@@ -39,14 +39,14 @@ router.patch('/:tripId', (req, res) => {
           });
         } else {
           res.status(401).json({
-            status: 'failed',
-            result,
+            status: 'error',
+            error: 'Trip patch failed',
           });
         }
       });
     } else {
       res.status(401).json({
-        message: 'failed',
+        status: 'error',
         error: 'Not authorized to cancel trip',
       });
     }
@@ -57,11 +57,11 @@ router.get('/', (req, res) => {
   verify(req).then((result2) => {
     if (result2) {
       console.log(result2);
-      viewtrips().then((result) => {
+      viewtrips().then((data) => {
         if (result !== 'failed') {
           res.status(200).json({
             status: 'success',
-            result,
+            data,
           });
         } else {
           res.status(400).json({
