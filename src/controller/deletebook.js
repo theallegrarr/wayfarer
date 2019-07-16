@@ -8,7 +8,7 @@ function deletebook(info, user, userid) {
     bookfind(info, -1, -1).then((result) => {
       
       if (result !== undefined) {
-        console.log(result);
+        console.log('search: ',result);
         if (result.rowCount > 0) {
           if (result.rows[0].user_id !== userid) {
             resolve('not authorized to delete this booking');
