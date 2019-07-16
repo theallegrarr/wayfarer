@@ -70,6 +70,7 @@ router.delete('/:id', function (req, res) {
   (0, _verify2.default)(req).then(function (result2) {
     if (result2) {
       (0, _deletebook2.default)(req.params.id, req.body, result2.id).then(function (result) {
+        console.log(result2.id, result);
         if (result === 'success') {
           res.status(200).json({
             status: 'success',

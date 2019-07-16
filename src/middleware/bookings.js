@@ -48,6 +48,7 @@ router.delete('/:id', (req, res) => {
   verify(req).then((result2) => {
     if (result2) {
       deletebook(req.params.id, req.body, result2.id).then((result) => {
+        console.log(result2.id,result);
         if (result === 'success') {
           res.status(200).json({
             status: 'success',
