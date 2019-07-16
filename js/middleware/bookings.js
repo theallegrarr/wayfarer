@@ -73,6 +73,7 @@ router.delete('/:id', function (req, res) {
           res.status(200).json({
             status: 'success',
             data: {
+              id: req.params.id,
               message: 'Booking deleted successfully'
             }
           });

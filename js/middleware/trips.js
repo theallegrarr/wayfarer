@@ -49,7 +49,7 @@ router.post('/', function (req, res) {
 
 router.patch('/:tripId', function (req, res) {
   (0, _verify2.default)(req).then(function (result2) {
-    if (result2 && req.body.is_admin === true) {
+    if (result2) {
       (0, _patchTrip2.default)(req.params.tripId).then(function (result) {
         if (result === 'success') {
           res.status(200).json({
@@ -80,7 +80,6 @@ router.get('/', function (req, res) {
       console.log(result2);
       (0, _viewtrips2.default)().then(function (data) {
         if (data !== 'failed') {
-
           res.status(200).json({
             status: 'success',
             data: data
