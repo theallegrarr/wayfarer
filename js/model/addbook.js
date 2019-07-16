@@ -100,8 +100,8 @@ function addbook(info, rowc) {
           rowcount = rowc + 1;
           // const bookId = result - 1;
           data = {
-            id: rowcount,
-            user_id: info.user_id,
+            id: info.id,
+            user_id: result.id,
             trip_id: info.trip_id,
             bus_id: tripInfo.bus_id,
             trip_date: tripInfo.trip_date,
