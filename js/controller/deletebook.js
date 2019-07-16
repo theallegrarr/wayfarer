@@ -14,12 +14,13 @@ var _deletebook2 = _interopRequireDefault(_deletebook);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function deletebook(info, user) {
+function deletebook(info, user, userid) {
 
   return new Promise(function (resolve, reject) {
+    console.log(info, user, userid);
     (0, _bookfind2.default)(info, -1, -1).then(function (result) {
       if (result.rowCount > 0) {
-        if (result.rows[0].user_id !== user.id) {
+        if (result.rows[0].user_id !== userid) {
           console.log(result.rows[0].user_id);
           resolve('not authorized to delete this booking');
         }

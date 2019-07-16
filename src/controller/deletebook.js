@@ -1,12 +1,13 @@
 import bookfind from '../model/bookfind';
 import remove from '../model/deletebook';
 
-function deletebook(info, user) {
+function deletebook(info, user, userid) {
 
   return new Promise((resolve, reject) => {
+    console.log(info, user, userid);
     bookfind(info, -1, -1).then((result) => {
       if (result.rowCount > 0) {
-        if (result.rows[0].user_id !== user.id) {
+        if (result.rows[0].user_id !== userid) {
           console.log(result.rows[0].user_id);
           resolve('not authorized to delete this booking');
         }
