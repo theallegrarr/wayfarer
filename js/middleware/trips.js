@@ -79,7 +79,7 @@ router.get('/', function (req, res) {
     if (result2) {
       console.log(result2);
       (0, _viewtrips2.default)().then(function (data) {
-        if (result !== 'failed') {
+        if (data !== 'failed') {
           res.status(200).json({
             status: 'success',
             data: data
