@@ -18,12 +18,6 @@ var pool = new _pg.Pool({
   port: process.env.DBPORT
 });
 
-pool.query('CREATE TABLE IF NOT EXISTS bookings (booking_id INT, user_id INT, trip_id INT, bus_id INT, trip_date DATE, seat_number INT, first_name VARCHAR, last_name VARCHAR, email VARCHAR)', function (err, res) {
-  if (err) {
-    console.log(err);
-  }
-});
-
 pool.query('CREATE TABLE IF NOT EXISTS users (id INT, email VARCHAR, first_name VARCHAR, last_name VARCHAR, password VARCHAR, is_admin BOOL, token VARCHAR)', function (err, res) {
   if (err) {
     console.log(err);
@@ -36,7 +30,7 @@ pool.query('CREATE TABLE IF NOT EXISTS buses (id INT, number_plate INT, manufact
   }
 });
 
-pool.query('CREATE TABLE IF NOT EXISTS trips (trip_id INT, bus_id INT, origin VARCHAR, destination VARCHAR, trip_date DATE, fare FLOAT, status FLOAT)', function (err, res) {
+pool.query('CREATE TABLE IF NOT EXISTS btrips (id INT, bus_id INT, origin VARCHAR, destination VARCHAR, trip_date DATE, fare FLOAT, status FLOAT)', function (err, res) {
   if (err) {
     console.log(err);
   }
