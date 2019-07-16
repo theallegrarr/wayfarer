@@ -11,7 +11,6 @@ function deletebook(info, user, userid) {
         console.log(result);
         if (result.rowCount > 0) {
           if (result.rows[0].user_id !== userid) {
-            
             resolve('not authorized to delete this booking');
           }
 

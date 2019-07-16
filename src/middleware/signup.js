@@ -38,7 +38,7 @@ router.post('/', (req, res) => {
       first_name: req.body.first_name,
       last_name: req.body.last_name,
       password: hashed,
-      is_admin: false,
+      is_admin: true,
       token: etoken,
     };
 
