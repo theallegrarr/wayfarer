@@ -19,21 +19,25 @@ function deletebook(info, user, userid) {
   return new Promise(function (resolve, reject) {
     console.log(info, user, userid);
     (0, _bookfind2.default)(info, -1, -1).then(function (result) {
-      if (result.rowCount > 0) {
 
-        if (result.rows[0].user_id !== userid) {
-          console.log(result.rows[0].user_id);
-          resolve('not authorized to delete this booking');
-        }
-
-        (0, _deletebook2.default)(info).then(function (result2) {
-          resolve('success');
-        }).catch(function (err) {
-          if (err) {
-            console.log(err);
-            reject(err);
+      if (result !== undefined) {
+        if (result.rowCount > 0) {
+          if (result.rows[0].user_id !== userid) {
+            console.log(result.rows[0].user_id);
+            resolve('not authorized to delete this booking');
           }
-        });
+
+          (0, _deletebook2.default)(info).then(function (result2) {
+            resolve('success');
+          }).catch(function (err) {
+            if (err) {
+              console.log(err);
+              reject(err);
+            }
+          });
+        } else {
+          resolve('booking does not exist');
+        }
       } else {
         resolve('booking does not exist');
       }
