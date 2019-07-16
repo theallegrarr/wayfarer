@@ -6,23 +6,18 @@ import app from '../route/app';
 dotenv.config();
 chai.use(chaiHttp);
 
+const should = chai.should();
 const user = {
-  id: 4,
-  token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNhc3RvQGdtYWlsLmNvbSIsImlkIjo3NDcsImlhdCI6MTU2MzI4Nzk0MCwiZXhwIjoxNTYzMzE2NzQwfQ.DZgNzf8hlF8yHek7dorqZ3kDyUlkU1rUqVHhzJ-35ow',
+  token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNhbHNva2VsQGdtYWlsLmNvbSIsImlhdCI6MTU2MzE4MjE5NiwiZXhwIjoxNTYzMjEwOTk2fQ.a2lwnqLbuxMYF_tZGdVkWxNPgrz42DolTsU0cW2JyeI',
   user_id: 4,
   is_admin: true,
-  bus_id: 1,
-  origin: 'Lagos',
-  destination: 'Kaduna',
-  trip_date: '2019-07-30T00:00:00.000Z',
-  fare: 8500,
-  status: 1,  
+  trip_id: 4,
 };
 
-describe('TRIP Tests', () => {
-  it('Should Create Trip', (done) => {
+describe('BOOKING Tests', () => {
+  it('Should Create booking', (done) => {
     chai.request(app)
-      .post('/v1/trips')
+      .post('/v1/bookings')
       .send(user)
       .end((err, res) => {
         res.should.have.status(201);
@@ -31,7 +26,7 @@ describe('TRIP Tests', () => {
   });
   it('Should return all Trips', (done) => {
     chai.request(app)
-      .get('/v1/trips')
+      .get('/v1/bookings')
       .send(user)
       .end((err, res) => {
         res.should.have.status(200);
