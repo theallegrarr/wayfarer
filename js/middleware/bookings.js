@@ -85,10 +85,17 @@ router.delete('/:id', function (req, res) {
           });
         }
       });
-    } else if (result2 === false) {
+    } else {
       res.status(401).json({
         status: 'error',
         error: 'user not valid'
+      });
+    }
+  }).catch(function (error) {
+    if (error) {
+      res.status(401).json({
+        status: 'error',
+        error: 'delete failed'
       });
     }
   });

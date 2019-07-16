@@ -16,7 +16,7 @@ function deletebook(id) {
   query = {
     // give the query a unique name
     name: 'delete-booking',
-    text: 'DELETE FROM bookings WHERE id = $1',
+    text: 'DELETE FROM bbookings WHERE id = $1',
     values: [id],
   };
 
