@@ -1,10 +1,18 @@
 import express from 'express';
 import bcrypt from 'bcrypt';
+import validator from 'email-validator';
 import addUser from '../controller/adduser';
 
 const router = express.Router();
 
 router.post('/', (req, res) => {
+  const validEmail = validator.validate(req.body.email);
+  if (req.body.password === undefined || validEmail === false) {
+    res.status(401.1).json({
+      message: 'wrong login parameters',
+    });
+  }
+
   bcrypt.hash(req.body.password, 10, (err, hash) => {
     if (err) {
       return res.status(500).json({

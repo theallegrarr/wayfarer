@@ -1,6 +1,7 @@
 // hold user requests sign-in sign-up
 import express from 'express';
 import dotenv from 'dotenv';
+import validator from 'email-validator';
 import signIn from '../controller/signin';
 
 const router = express.Router();
@@ -12,7 +13,13 @@ router.post('/', (req, res) => {
     password: req.body.password,
     is_admin: req.body.is_admin,
   };
-  console.log(data);
+
+  const validEmail = validator.validate(data.email);
+  if (data.password === undefined || validEmail === false) {
+    res.status(401.1).json({
+      message: 'wrong login parameters',
+    });
+  }
   signIn(data).then((result) => {
 
     if (result !== 'failed') {

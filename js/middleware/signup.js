@@ -12,6 +12,10 @@ var _bcrypt = require('bcrypt');
 
 var _bcrypt2 = _interopRequireDefault(_bcrypt);
 
+var _emailValidator = require('email-validator');
+
+var _emailValidator2 = _interopRequireDefault(_emailValidator);
+
 var _adduser = require('../controller/adduser');
 
 var _adduser2 = _interopRequireDefault(_adduser);
@@ -21,6 +25,13 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var router = _express2.default.Router();
 
 router.post('/', function (req, res) {
+  var validEmail = _emailValidator2.default.validate(req.body.email);
+  if (req.body.password === undefined || validEmail === false) {
+    res.status(401.1).json({
+      message: 'wrong login parameters'
+    });
+  }
+
   _bcrypt2.default.hash(req.body.password, 10, function (err, hash) {
     if (err) {
       return res.status(500).json({
