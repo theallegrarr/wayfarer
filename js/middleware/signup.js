@@ -8,13 +8,13 @@ var _express = require('express');
 
 var _express2 = _interopRequireDefault(_express);
 
-var _bcrypt = require('bcrypt');
-
-var _bcrypt2 = _interopRequireDefault(_bcrypt);
-
 var _emailValidator = require('email-validator');
 
 var _emailValidator2 = _interopRequireDefault(_emailValidator);
+
+var _encrypt = require('../controller/encrypt');
+
+var _encrypt2 = _interopRequireDefault(_encrypt);
 
 var _adduser = require('../controller/adduser');
 
@@ -33,39 +33,46 @@ router.post('/', function (req, res) {
     });
   }
 
-  _bcrypt2.default.hash(req.body.password, 10, function (err, hash) {
-    if (err) {
-      return res.status(401.1).json({
+  (0, _encrypt2.default)(req.body.password).then(function (hashed) {
+    if (hashed === 'failed') {
+      res.status(400).json({
         status: 'error',
-        error: 'wrong login parameters'
+        error: 'Bad password'
       });
     }
+    var data = {
+      id: req.body.id,
+      email: req.body.email,
+      first_name: req.body.first_name,
+      last_name: req.body.last_name,
+      password: hashed,
+      is_admin: req.body.is_admin
+    };
 
-    if (hash) {
-      var data = {
-        id: req.body.id,
-        email: req.body.email,
-        first_name: req.body.first_name,
-        last_name: req.body.last_name,
-        password: hash,
-        is_admin: req.body.is_admin
-      };
-
-      (0, _adduser2.default)(data).then(function (result) {
-        if (result === 'success') {
-          res.status(201).json({
-            status: 'Success',
-            data: data
-          });
-        } else {
-          res.status(409).json({
-            status: 'error',
-            error: 'Mail Already Exists'
-          });
-        }
-      });
-      return 'hash complete';
-    }
+    (0, _adduser2.default)(data).then(function (result) {
+      if (result === 'success') {
+        res.status(201).json({
+          status: 'Success',
+          data: data
+        });
+      } else {
+        res.status(409).json({
+          status: 'error',
+          error: 'Mail Already Exists'
+        });
+      }
+    }).catch(function (error) {
+      if (error) {
+        console.log(error);
+        res.status(409).json({
+          status: 'error',
+          error: 'Sign up failed'
+        });
+      }
+    });
+    return 'hash complete';
+  }).catch(function (error) {
+    console.log(error);
   });
 });
 

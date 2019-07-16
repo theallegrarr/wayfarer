@@ -1,6 +1,6 @@
 import express from 'express';
-import bcrypt from 'bcrypt';
 import validator from 'email-validator';
+import encrypt from '../controller/encrypt';
 import addUser from '../controller/adduser';
 
 const router = express.Router();
@@ -14,40 +14,47 @@ router.post('/', (req, res) => {
     });
   }
 
-  bcrypt.hash(req.body.password, 10, (err, hash) => {
-    if (err) {
-      return res.status(401.1).json({
+  encrypt(req.body.password).then((hashed) => {
+    if (hashed === 'failed') {
+      res.status(400).json({
         status: 'error',
-        error: 'wrong login parameters',
+        error: 'Bad password',
       });
     }
+    const data = {
+      id: req.body.id,
+      email: req.body.email,
+      first_name: req.body.first_name,
+      last_name: req.body.last_name,
+      password: hashed,
+      is_admin: req.body.is_admin,
+    };
 
-    if (hash) {
-      const data = {
-        id: req.body.id,
-        email: req.body.email,
-        first_name: req.body.first_name,
-        last_name: req.body.last_name,
-        password: hash,
-        is_admin: req.body.is_admin,
-      };
-
-      addUser(data).then((result) => {
-        if (result === 'success') {
-          res.status(201).json({
-            status: 'Success',
-            data,
-          });
-        } else {
-          res.status(409).json({
-            status: 'error',
-            error: 'Mail Already Exists',
-          });
-        }
-      });
-      return 'hash complete';
-    }
-  });
+    addUser(data).then((result) => {
+      if (result === 'success') {
+        res.status(201).json({
+          status: 'Success',
+          data,
+        });
+      } else {
+        res.status(409).json({
+          status: 'error',
+          error: 'Mail Already Exists',
+        });
+      }
+    }).catch((error)  => { 
+      if (error) {
+        console.log(error);
+        res.status(409).json({
+          status: 'error',
+          error: 'Sign up failed',
+        });
+      }
+    });
+    return 'hash complete';
+  }).catch((error)=>{
+    console.log(error);
+  })
 });
 
 export default router;
