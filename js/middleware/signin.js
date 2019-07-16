@@ -32,6 +32,7 @@ router.post('/', function (req, res) {
     password: req.body.password,
     is_admin: req.body.is_admin
   };
+  console.log(validEmail, ' ', data);
 
   var validEmail = _emailValidator2.default.validate(data.email);
   if (data.password === undefined || validEmail === false) {
@@ -40,7 +41,7 @@ router.post('/', function (req, res) {
       error: 'wrong login parameters'
     });
   }
-  console.log(validEmail, ' ', data);
+
   (0, _signin2.default)(data).then(function (result) {
     if (result !== 'failed') {
       console.log(result, ' ', data);
