@@ -45,6 +45,7 @@ router.post('/', (req, res) => {
 
 router.delete('/:id', (req, res) => {
   verify(req).then((result2) => {
+    console.log(req.body);
     if (result2) {
       deletebook(req.params.id, req.body).then((result) => {
         if (result === 'success') {

@@ -19,7 +19,7 @@ function deletebook(info, user) {
   return new Promise(function (resolve, reject) {
     (0, _bookfind2.default)(info, -1, -1).then(function (result) {
       if (result.rowCount > 0) {
-        if (result.rows[0].user_id !== user.user_id) {
+        if (result.rows[0].user_id !== user.id) {
           console.log(result.rows[0].user_id);
           resolve('not authorized to delete this booking');
         }
