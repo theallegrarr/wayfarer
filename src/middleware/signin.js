@@ -24,7 +24,7 @@ router.post('/', (req, res) => {
   signIn(data).then((result) => {
     if (result !== 'failed') {
       res.status(200).json({
-        message: 'success',
+        status: 'success',
         data: {
           user_id: data.id,
           is_admin: data.is_admin,

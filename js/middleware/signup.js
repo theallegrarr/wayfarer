@@ -54,7 +54,7 @@ router.post('/', function (req, res) {
       (0, _adduser2.default)(data).then(function (result) {
         if (result === 'success') {
           res.status(201).json({
-            message: 'Success',
+            status: 'Success',
             data: data
           });
         } else {

@@ -35,7 +35,7 @@ router.post('/', (req, res) => {
       addUser(data).then((result) => {
         if (result === 'success') {
           res.status(201).json({
-            message: 'Success',
+            status: 'Success',
             data,
           });
         } else {
