@@ -42,6 +42,7 @@ router.post('/', function (req, res) {
   }
   (0, _signin2.default)(data).then(function (result) {
     if (result !== 'failed') {
+      console.log(result, ' ', data);
       res.status(200).json({
         status: 'success',
         data: {
@@ -50,6 +51,7 @@ router.post('/', function (req, res) {
           token: result
         }
       });
+      // noone
     } else {
       res.status(401.1).json({
         status: 'error',
