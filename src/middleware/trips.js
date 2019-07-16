@@ -65,21 +65,21 @@ router.get('/', (req, res) => {
           });
         } else {
           res.status(400).json({
-            status: 'failed',
+            status: 'error',
             error: 'no trips found',
           });
         }
       }).catch((error) => {
         if (error) {
           res.status(400).json({
-            status: 'failed',
+            status: 'error',
             error,
           });
         }
       });
     } else {
       res.status(400).json({
-        message: 'failed',
+        status: 'error',
         error: 'user not valid',
       });
     }

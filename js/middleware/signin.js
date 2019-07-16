@@ -36,7 +36,8 @@ router.post('/', function (req, res) {
   var validEmail = _emailValidator2.default.validate(data.email);
   if (data.password === undefined || validEmail === false) {
     res.status(401.1).json({
-      message: 'wrong login parameters'
+      status: 'error',
+      error: 'wrong login parameters'
     });
   }
   (0, _signin2.default)(data).then(function (result) {
@@ -52,7 +53,8 @@ router.post('/', function (req, res) {
       });
     } else {
       res.status(401.1).json({
-        message: 'wrong login parameters'
+        status: 'error',
+        error: 'wrong login parameters'
       });
     }
   }).catch(function (error) {

@@ -87,21 +87,21 @@ router.get('/', function (req, res) {
           });
         } else {
           res.status(400).json({
-            status: 'failed',
+            status: 'error',
             error: 'no trips found'
           });
         }
       }).catch(function (error) {
         if (error) {
           res.status(400).json({
-            status: 'failed',
+            status: 'error',
             error: error
           });
         }
       });
     } else {
       res.status(400).json({
-        message: 'failed',
+        status: 'error',
         error: 'user not valid'
       });
     }

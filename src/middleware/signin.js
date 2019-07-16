@@ -17,7 +17,8 @@ router.post('/', (req, res) => {
   const validEmail = validator.validate(data.email);
   if (data.password === undefined || validEmail === false) {
     res.status(401.1).json({
-      message: 'wrong login parameters',
+      status: 'error',
+      error: 'wrong login parameters',
     });
   }
   signIn(data).then((result) => {
@@ -33,7 +34,8 @@ router.post('/', (req, res) => {
       });
     } else {
       res.status(401.1).json({
-        message: 'wrong login parameters',
+        status: 'error',
+        error: 'wrong login parameters',
       });
     }
   }).catch((error) => {

@@ -28,14 +28,16 @@ router.post('/', function (req, res) {
   var validEmail = _emailValidator2.default.validate(req.body.email);
   if (req.body.password === undefined || validEmail === false) {
     res.status(401.1).json({
-      message: 'wrong login parameters'
+      status: 'error',
+      error: 'wrong login parameters'
     });
   }
 
   _bcrypt2.default.hash(req.body.password, 10, function (err, hash) {
     if (err) {
-      return res.status(500).json({
-        error: 'Invalid Password'
+      return res.status(401.1).json({
+        status: 'error',
+        error: 'wrong login parameters'
       });
     }
 
@@ -57,7 +59,7 @@ router.post('/', function (req, res) {
           });
         } else {
           res.status(409).json({
-            message: 'Failed',
+            status: 'error',
             error: 'Mail Already Exists'
           });
         }
