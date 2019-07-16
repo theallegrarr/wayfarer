@@ -26,7 +26,6 @@ function addBook(info) {
             resolve(value);
           }).catch((err) => {
             if (err) {
-              console.log(err);
               reject(err);
             }
           });
@@ -36,7 +35,6 @@ function addBook(info) {
       });
     }).catch((err) => {
       if (err) {
-        console.log(err);
         reject(err);
       }
     });

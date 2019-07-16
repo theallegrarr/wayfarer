@@ -42,7 +42,6 @@ function addBook(info) {
             resolve(value);
           }).catch(function (err) {
             if (err) {
-              console.log(err);
               reject(err);
             }
           });
@@ -52,7 +51,6 @@ function addBook(info) {
       });
     }).catch(function (err) {
       if (err) {
-        console.log(err);
         reject(err);
       }
     });

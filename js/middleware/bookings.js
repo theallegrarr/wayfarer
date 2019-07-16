@@ -43,13 +43,25 @@ router.post('/', function (req, res) {
           status: 'success',
           data: data
         });
+      }).catch(function (error) {
+        console.log(error);
+        res.status(400).json({
+          status: 'error',
+          error: error
+        });
       });
-    } else if (result2 === false) {
+    }
+    if (result2 === false) {
       res.status(400).json({
         status: 'error',
         error: 'user not valid'
       });
     }
+  }).catch(function (error) {
+    res.status(400).json({
+      status: 'error',
+      error: error
+    });
   });
 });
 

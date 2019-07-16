@@ -10,6 +10,10 @@ var _dotenv = require('dotenv');
 
 var _dotenv2 = _interopRequireDefault(_dotenv);
 
+var _jsonwebtoken = require('jsonwebtoken');
+
+var _jsonwebtoken2 = _interopRequireDefault(_jsonwebtoken);
+
 var _bookfind = require('./bookfind');
 
 var _bookfind2 = _interopRequireDefault(_bookfind);
@@ -28,23 +32,23 @@ var pool = new _pg.Pool({
 
 function getUserInfo(user) {
   return new Promise(function (resolve, reject) {
-    pool.query('SELECT * FROM users WHERE id=$1', [user.user_id], function (err, res) {
+    var decode = _jsonwebtoken2.default.verify(user.token, process.env.JWT_KEY);
+    pool.query('SELECT * FROM users WHERE email=$1', [decode.email], function (err, res) {
       if (res.rowCount > 0) {
-        var data = res.rows[0];
-        resolve(data);
-        reject(err);
+        var idata = res.rows[0];
+        resolve(idata);
       } else {
-        reject(err);
+        resolve('failed');
       }
     });
   }).catch(function (err) {
-    return err;
+    console.log(err);
   });
 }
 
 function getTripInfo(tripId) {
   return new Promise(function (resolve, reject) {
-    pool.query('SELECT * FROM trips WHERE trip_id=$1', [tripId], function (err, res) {
+    pool.query('SELECT * FROM btrips WHERE id=$1', [tripId], function (err, res) {
       if (res.rowCount > 0) {
         var data = res.rows[0];
         resolve(data);
@@ -89,6 +93,9 @@ function addbook(info, rowc) {
           if (result2 === 'invalid id') {
             resolve('invalid id');
           }
+          if (result === 'failed') {
+            resolve('invalid id');
+          }
           seat = result3 + 1;
           rowcount = rowc + 1;
           // const bookId = result - 1;
@@ -106,21 +113,20 @@ function addbook(info, rowc) {
 
           pool.query('INSERT INTO bookings(id, user_id, trip_id, bus_id, trip_date, seat_number, first_name, last_name, email) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9)', [data.id, data.user_id, data.trip_id, data.bus_id, data.trip_date, data.seat_number, data.first_name, data.last_name, data.email], function (err, res) {
             resolve(data);
-            reject(err);
           });
         }).catch(function (err) {
           if (err) {
-            console.log(err);
+            reject(err);
           }
         });
       }).catch(function (err) {
         if (err) {
-          console.log(err);
+          reject(err);
         }
       });
     }).catch(function (err) {
       if (err) {
-        console.log(err);
+        reject(err);
       }
     });
   });

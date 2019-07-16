@@ -21,13 +21,25 @@ router.post('/', (req, res) => {
           status: 'success',
           data,
         });
+      }).catch((error) => {
+        console.log(error);
+        res.status(400).json({
+          status: 'error',
+          error,
+        });
       });
-    } else if (result2 === false) {
+    }
+    if (result2 === false) {
       res.status(400).json({
         status: 'error',
         error: 'user not valid',
       });
     }
+  }).catch((error) => {
+    res.status(400).json({
+      status: 'error',
+      error,
+    });
   });
 });
 
