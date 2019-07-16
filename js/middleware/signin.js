@@ -41,7 +41,6 @@ router.post('/', function (req, res) {
     });
   }
   (0, _signin2.default)(data).then(function (result) {
-
     if (result !== 'failed') {
       res.status(200).json({
         message: 'success',

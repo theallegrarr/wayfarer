@@ -6,6 +6,9 @@ function signIn(user) {
   return new Promise((resolve, reject) => {
     let etoken = '';
     signin(user.email).then((result) => {
+      if (result === 'false') {
+        resolve('failed');
+      }
       if (result) {
         if (result.rowCount > 0) {
           bcrypt.compare(user.password, result.rows[0].password, (err, response) => {
@@ -29,9 +32,7 @@ function signIn(user) {
             }
           });
         }
-      } else {
-        resolve('failed');
-      }
+      } 
     }).catch((error) => {
       reject(error);
     });

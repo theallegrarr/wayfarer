@@ -22,6 +22,9 @@ function signIn(user) {
   return new Promise(function (resolve, reject) {
     var etoken = '';
     (0, _signin2.default)(user.email).then(function (result) {
+      if (result === 'false') {
+        resolve('failed');
+      }
       if (result) {
         if (result.rowCount > 0) {
           _bcrypt2.default.compare(user.password, result.rows[0].password, function (err, response) {
@@ -43,8 +46,6 @@ function signIn(user) {
             }
           });
         }
-      } else {
-        resolve('failed');
       }
     }).catch(function (error) {
       reject(error);
