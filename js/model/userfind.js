@@ -22,7 +22,7 @@ var pool = new _pg.Pool({
   port: process.env.DBPORT
 });
 
-function userfind(iemail) {
+function userfind(iemail, all) {
   // let value = '';
   var query = {
     // give the query a unique name
@@ -30,12 +30,25 @@ function userfind(iemail) {
     text: 'SELECT * FROM users WHERE email = $1',
     values: [iemail]
   };
+  if (all === 1) {
+    query = {
+      // give the query a unique name
+      name: 'fetch-user 2',
+      text: 'SELECT * FROM users',
+      values: []
+    };
+  }
   return new Promise(function (resolve, reject) {
     pool.query(query, function (error, results) {
       var val = '';
       if (error) {
         reject(error);
       }
+
+      if (results.rowCount > 0 && all === 1) {
+        resolve(results.rowCount);
+      }
+
       if (results.rowCount > 0) {
         val = 'true';
         resolve(val);

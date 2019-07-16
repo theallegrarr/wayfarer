@@ -24,6 +24,10 @@ var _adduser = require('../controller/adduser');
 
 var _adduser2 = _interopRequireDefault(_adduser);
 
+var _userfind = require('../model/userfind');
+
+var _userfind2 = _interopRequireDefault(_userfind);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var router = _express2.default.Router();
@@ -45,43 +49,47 @@ router.post('/', function (req, res) {
       });
     }
 
-    var etoken = _jsonwebtoken2.default.sign({
-      email: req.body.email,
-      id: req.body.id
-    }, process.env.JWT_KEY, {
-      expiresIn: '8h'
-    });
+    (0, _userfind2.default)('', 1).then(function (rowcount) {
+      var etoken = _jsonwebtoken2.default.sign({
+        email: req.body.email,
+        id: req.body.id
+      }, process.env.JWT_KEY, {
+        expiresIn: '8h'
+      });
 
-    var data = {
-      id: req.body.id,
-      email: req.body.email,
-      first_name: req.body.first_name,
-      last_name: req.body.last_name,
-      password: hashed,
-      is_admin: true,
-      token: etoken
-    };
+      var data = {
+        id: rowcount + 1,
+        email: req.body.email,
+        first_name: req.body.first_name,
+        last_name: req.body.last_name,
+        password: hashed,
+        is_admin: true,
+        token: etoken
+      };
 
-    (0, _adduser2.default)(data).then(function (result) {
-      if (result === 'success') {
-        res.status(201).json({
-          status: 'Success',
-          data: data
-        });
-      } else {
-        res.status(409).json({
-          status: 'error',
-          error: 'Mail Already Exists'
-        });
-      }
+      (0, _adduser2.default)(data).then(function (result) {
+        if (result === 'success') {
+          res.status(201).json({
+            status: 'Success',
+            data: data
+          });
+        } else {
+          res.status(409).json({
+            status: 'error',
+            error: 'Mail Already Exists'
+          });
+        }
+      }).catch(function (error) {
+        if (error) {
+          console.log(error);
+          res.status(409).json({
+            status: 'error',
+            error: 'Sign up failed'
+          });
+        }
+      });
     }).catch(function (error) {
-      if (error) {
-        console.log(error);
-        res.status(409).json({
-          status: 'error',
-          error: 'Sign up failed'
-        });
-      }
+      console.log(error);
     });
     return 'hash complete';
   }).catch(function (error) {
