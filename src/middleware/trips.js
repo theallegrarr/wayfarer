@@ -58,6 +58,7 @@ router.get('/', (req, res) => {
       console.log(result2);
       viewtrips().then((data) => {
         if (data !== 'failed') {
+          
           res.status(200).json({
             status: 'success',
             data,
