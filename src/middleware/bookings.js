@@ -57,6 +57,7 @@ router.delete('/:id', (req, res) => {
             },
           });
         } else {
+          console.log(req.body);
           res.status(401).json({
             status: 'error',
             error: result,
@@ -64,6 +65,7 @@ router.delete('/:id', (req, res) => {
         }
       });
     } else {
+      console.log(req.body);
       res.status(401).json({
         status: 'error',
         error: 'user not valid',
@@ -71,6 +73,7 @@ router.delete('/:id', (req, res) => {
     }
   }).catch((error) => {
     if (error) {
+      console.log(req.body);
       res.status(401).json({
         status: 'error',
         error: 'delete failed',

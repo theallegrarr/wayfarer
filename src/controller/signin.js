@@ -15,7 +15,7 @@ function signIn(user) {
             if (response === true) {
               etoken = jwt.sign({
                 email: user.email,
-                id: user.id,
+                id: result.rows[0].id,
               },
               process.env.JWT_KEY,
               {

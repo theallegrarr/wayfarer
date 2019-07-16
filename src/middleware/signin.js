@@ -13,16 +13,16 @@ router.post('/', (req, res) => {
     password: req.body.password,
     is_admin: req.body.is_admin,
   };
-  console.log(validEmail,' ',data);
-  
+
   const validEmail = validator.validate(data.email);
+  console.log(validEmail,' ',data);
   if (data.password === undefined || validEmail === false) {
     res.status(401.1).json({
       status: 'error',
       error: 'wrong login parameters',
     });
   }
-  
+
   signIn(data).then((result) => {
     if (result !== 'failed') {
       console.log(result,' ',data);

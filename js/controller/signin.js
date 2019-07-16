@@ -31,7 +31,7 @@ function signIn(user) {
             if (response === true) {
               etoken = _jsonwebtoken2.default.sign({
                 email: user.email,
-                id: user.id
+                id: result.rows[0].id
               }, process.env.JWT_KEY, {
                 expiresIn: '8h'
               });
