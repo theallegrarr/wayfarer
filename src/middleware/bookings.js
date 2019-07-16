@@ -63,10 +63,17 @@ router.delete('/:id', (req, res) => {
           });
         }
       });
-    } else if (result2 === false) {
+    } else {
       res.status(401).json({
         status: 'error',
         error: 'user not valid',
+      });
+    }
+  }).catch((error) => {
+    if (error) {
+      res.status(401).json({
+        status: 'error',
+        error: 'delete failed',
       });
     }
   });
