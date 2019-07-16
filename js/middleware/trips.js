@@ -30,6 +30,7 @@ var router = _express2.default.Router();
 
 router.post('/', function (req, res) {
   var data = req.body;
+  console.log(data.body);
   (0, _verify2.default)(req).then(function (result2) {
     if (result2) {
       (0, _addtrips2.default)(data).then(function (result) {

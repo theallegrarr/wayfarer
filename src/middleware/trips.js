@@ -8,6 +8,7 @@ const router = express.Router();
 
 router.post('/', (req, res) => {
   const data = req.body;
+  console.log(data.body);
   verify(req).then((result2) => {
     if (result2) {
       addtrips(data).then((result) => {
