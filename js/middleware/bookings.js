@@ -36,7 +36,7 @@ router.post('/', function (req, res) {
         if (data === 'invalid id') {
           res.status(400).json({
             status: 'error',
-            message: 'trip does not exist'
+            error: 'trip does not exist'
           });
         }
         res.status(201).json({

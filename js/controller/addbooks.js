@@ -22,7 +22,7 @@ function addBook(info) {
 
   return new Promise(function (resolve, reject) {
     var rowcount = -1;
-
+    console.log(info);
     (0, _bookfind2.default)(0).then(function (result) {
       if (result) {
         rowcount = result.rowCount;
