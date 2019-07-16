@@ -26,8 +26,8 @@ function patch(tripid) {
   // let value = '';
   var query = {
     // give the query a unique name
-    name: 'fetch-user',
-    text: 'UPDATE trips SET status=$2 WHERE trip_id=$1',
+    name: 'fetch-trips',
+    text: 'UPDATE btrips SET status=$2 WHERE id=$1',
     values: [tripid, 0]
   };
   return new Promise(function (resolve, reject) {
