@@ -28,9 +28,9 @@ router.post('/', function (req, res) {
     password: req.body.password,
     is_admin: req.body.is_admin
   };
-
+  console.log(data);
   (0, _signin2.default)(data).then(function (result) {
-    console.log(data);
+
     if (result !== 'failed') {
       res.status(200).json({
         message: 'success',

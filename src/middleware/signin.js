@@ -12,9 +12,9 @@ router.post('/', (req, res) => {
     password: req.body.password,
     is_admin: req.body.is_admin,
   };
-
+  console.log(data);
   signIn(data).then((result) => {
-    console.log(data);
+
     if (result !== 'failed') {
       res.status(200).json({
         message: 'success',
