@@ -8,6 +8,10 @@ var _express = require('express');
 
 var _express2 = _interopRequireDefault(_express);
 
+var _jsonwebtoken = require('jsonwebtoken');
+
+var _jsonwebtoken2 = _interopRequireDefault(_jsonwebtoken);
+
 var _emailValidator = require('email-validator');
 
 var _emailValidator2 = _interopRequireDefault(_emailValidator);
@@ -40,13 +44,22 @@ router.post('/', function (req, res) {
         error: 'Bad password'
       });
     }
+
+    var etoken = _jsonwebtoken2.default.sign({
+      email: req.body.email,
+      id: req.body.id
+    }, process.env.JWT_KEY, {
+      expiresIn: '8h'
+    });
+
     var data = {
       id: req.body.id,
       email: req.body.email,
       first_name: req.body.first_name,
       last_name: req.body.last_name,
       password: hashed,
-      is_admin: req.body.is_admin
+      is_admin: false,
+      token: etoken
     };
 
     (0, _adduser2.default)(data).then(function (result) {
