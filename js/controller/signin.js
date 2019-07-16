@@ -18,8 +18,6 @@ var _signin2 = _interopRequireDefault(_signin);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var log = require('simple-node-logger').createSimpleLogger();
-
 function signIn(user) {
   return new Promise(function (resolve, reject) {
     var etoken = '';

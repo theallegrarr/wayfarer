@@ -2,8 +2,6 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import signin from '../model/signin';
 
-const log = require('simple-node-logger').createSimpleLogger();
-
 function signIn(user) {
   return new Promise((resolve, reject) => {
     let etoken = '';
