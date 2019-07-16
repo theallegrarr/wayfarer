@@ -27,7 +27,7 @@ function viewtrips() {
   var query = {
     // give the query a unique name
     name: 'fetch-trips',
-    text: 'SELECT * FROM trips'
+    text: 'SELECT * FROM btrips'
   };
   return new Promise(function (resolve, reject) {
     pool.query(query, function (error, results) {
