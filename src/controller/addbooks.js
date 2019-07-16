@@ -13,9 +13,9 @@ function addBook(info) {
       } else {
         rowcount = 0;
       }
-      tripfind(info.trip_id, 0).then((result) => {
+      tripfind(info.trip_id, 0).then((xresult) => {
         let val = '';
-        if (result === 'false') {
+        if (xresult === 'false') {
           val = 'trip is not valid';
           resolve(val);
         } else {

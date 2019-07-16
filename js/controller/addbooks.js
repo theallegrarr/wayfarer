@@ -29,9 +29,9 @@ function addBook(info) {
       } else {
         rowcount = 0;
       }
-      (0, _tripfind2.default)(info.trip_id, 0).then(function (result) {
+      (0, _tripfind2.default)(info.trip_id, 0).then(function (xresult) {
         var val = '';
-        if (result === 'false') {
+        if (xresult === 'false') {
           val = 'trip is not valid';
           resolve(val);
         } else {
