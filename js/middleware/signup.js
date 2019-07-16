@@ -52,7 +52,7 @@ router.post('/', function (req, res) {
     (0, _userfind2.default)('', 1).then(function (rowcount) {
       var etoken = _jsonwebtoken2.default.sign({
         email: req.body.email,
-        id: req.body.id
+        id: rowcount + 1
       }, process.env.JWT_KEY, {
         expiresIn: '8h'
       });

@@ -27,7 +27,7 @@ router.post('/', (req, res) => {
     getUserInfo('', 1).then((rowcount) =>{
       const etoken = jwt.sign({
         email: req.body.email,
-        id: req.body.id,
+        id: rowcount + 1,
       },
       process.env.JWT_KEY,
       {
