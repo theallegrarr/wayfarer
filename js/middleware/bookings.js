@@ -87,10 +87,17 @@ router.get('/', function (req, res) {
     if (result2) {
       if (req.body.is_admin === true) {
         (0, _getbooks2.default)(0, 0).then(function (result) {
-          res.status(200).json({
-            status: 'success',
-            result: result
-          });
+          if (result) {
+            res.status(200).json({
+              status: 'success',
+              result: result
+            });
+          } else {
+            res.status(400).json({
+              status: 'error',
+              message: 'no bookings found'
+            });
+          }
         }).catch(function (e) {
           if (e) {
             console.log(e);
