@@ -17,21 +17,18 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function deletebook(info, user, userid) {
 
   return new Promise(function (resolve, reject) {
-    console.log(info, user, userid);
     (0, _bookfind2.default)(info, -1, -1).then(function (result) {
 
       if (result !== undefined) {
-        console.log('search: ', result);
         if (result.rowCount > 0) {
           if (result.rows[0].user_id !== userid) {
             resolve('not authorized to delete this booking');
           }
 
-          (0, _deletebook2.default)(info).then(function (result2) {
+          (0, _deletebook2.default)(info).then(function () {
             resolve('success');
           }).catch(function (err) {
             if (err) {
-              console.log(err);
               reject(err);
             }
           });
@@ -44,7 +41,6 @@ function deletebook(info, user, userid) {
     }).catch(function (err) {
       if (err) {
         console.log('error 1:', err);
-        reject(err);
       }
     });
   });

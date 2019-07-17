@@ -27,7 +27,7 @@ var should = _chai2.default.should();
 
 var details = {
   id: 9,
-  email: 'kempo12@gmail.com',
+  email: 'kempo20@gmail.com',
   first_name: 'Helga',
   last_name: 'Paul',
   password: 'batoore',
@@ -45,8 +45,6 @@ describe('USER OPERATIONS', function () {
         throw new _assert.AssertionError(error);
       }
       (0, _chai.expect)(res.body).to.have.property('data');
-
-      // console.log('Response Body:', res.body);
     });
     done();
   });
@@ -60,7 +58,6 @@ describe('USER OPERATIONS', function () {
   it('Should Sign In', function (done) {
     _chai2.default.request(_app2.default).post('/v1/auth/signin').send(user).end(function (err, res) {
       res.should.have.status(200);
-      // console.log('Response Body:', res.body);
     });
     done();
   });

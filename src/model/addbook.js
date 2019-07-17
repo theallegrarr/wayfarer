@@ -1,7 +1,6 @@
 import { Pool } from 'pg';
 import dotenv from 'dotenv';
 import jwt from 'jsonwebtoken';
-import tripfind from './bookfind';
 
 dotenv.config();
 

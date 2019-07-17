@@ -11,7 +11,7 @@ const should = chai.should();
 
 const details = {
   id: 9,
-  email: 'kempo12@gmail.com',
+  email: 'kempo20@gmail.com',
   first_name: 'Helga',
   last_name: 'Paul',
   password: 'batoore',
@@ -33,7 +33,6 @@ describe('USER OPERATIONS', () => {
         }
         expect(res.body).to.have.property('data');
 
-        // console.log('Response Body:', res.body);
       });
     done();
   });
@@ -50,7 +49,6 @@ describe('USER OPERATIONS', () => {
       .send(user)
       .end((err, res) => {
         res.should.have.status(200);
-        // console.log('Response Body:', res.body);
       });
     done();
   });

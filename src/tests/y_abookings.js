@@ -8,10 +8,10 @@ chai.use(chaiHttp);
 
 const should = chai.should();
 const user = {
-  token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNhc3RvQGdtYWlsLmNvbSIsImlkIjo3NDcsImlhdCI6MTU2MzM1OTg0OSwiZXhwIjoxNTYzMzg4NjQ5fQ.o3xdq-HHB1VcI8DhbPYvNGfF46DoWGRYQcCQ5U3DY20',
+  token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvZWx5QGdtYWlsLmNvbSIsImlkIjo5LCJpYXQiOjE1NjMzNjk2NzYsImV4cCI6MTU2MzM5ODQ3Nn0.m1sbdBLi6yVUODKWm6afNzSs9xOGQYIXWS1rLgoCPMI',
   user_id: 4,
   is_admin: true,
-  trip_id: 4,
+  trip_id: 1,
 };
 
 describe('BOOKING Tests', () => {

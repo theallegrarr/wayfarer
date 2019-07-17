@@ -33,11 +33,10 @@ function addTrip(info) {
         fare: info.fare,
         status: 1.0
       };
-      console.log(productData);
+
       resolve(productData);
     }).catch(function (error) {
       console.log(error);
-      reject(error);
     });
   });
 }

@@ -29,7 +29,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var router = _express2.default.Router();
 
 router.post('/', function (req, res) {
-  console.log(req.body);
   (0, _verify2.default)(req).then(function (result2) {
     if (result2) {
       (0, _addtrips2.default)(req.body).then(function (data) {
@@ -77,7 +76,6 @@ router.patch('/:tripId', function (req, res) {
 router.get('/', function (req, res) {
   (0, _verify2.default)(req).then(function (result2) {
     if (result2) {
-      console.log(result2);
       (0, _viewtrips2.default)().then(function (data) {
         if (data !== 'failed') {
           res.status(200).json({

@@ -15,7 +15,6 @@ router.post('/', (req, res) => {
   };
 
   const validEmail = validator.validate(data.email);
-  console.log(validEmail,' ',data);
   if (data.password === undefined || validEmail === false) {
     res.status(401.1).json({
       status: 'error',
@@ -25,7 +24,6 @@ router.post('/', (req, res) => {
 
   signIn(data).then((result) => {
     if (result !== 'failed') {
-      console.log(result,' ',data);
       res.status(200).json({
         status: 'success',
         data: {

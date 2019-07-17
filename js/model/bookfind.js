@@ -51,7 +51,6 @@ function bookfind(id, tripId, userId) {
 
   return new Promise(function (resolve, reject) {
     pool.query(query, function (error, results) {
-      console.log(id, userId, tripId, results);
       var val = '';
       if (error) {
         resolve(false);

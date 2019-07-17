@@ -27,7 +27,6 @@ function addTrip(info) {
       resolve(productData);
     }).catch((error) => {
       console.log(error);
-      reject(error);
     });
   });
 }

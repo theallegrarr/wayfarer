@@ -7,16 +7,18 @@ dotenv.config();
 chai.use(chaiHttp);
 
 const trip = {
-  id: 568,
-  token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNhc3RvNDdAZ21haWwuY29tIiwiaWQiOjY2LCJpYXQiOjE1NjMzNjcyMDcsImV4cCI6MTU2MzM5NjAwN30.Wj6B1b7BIPpi7c8817BJLrQ3r62b9kxUyUllL70L9A0',
-  user_id: 66,
+  email: 'joely@gmail.com',
+  first_name: 'John',
+  last_name: 'Van',
+  password: 'batoore',
   is_admin: true,
+  token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvZWx5QGdtYWlsLmNvbSIsImlkIjo5LCJpYXQiOjE1NjMzNjk2NzYsImV4cCI6MTU2MzM5ODQ3Nn0.m1sbdBLi6yVUODKWm6afNzSs9xOGQYIXWS1rLgoCPMI',
   bus_id: 1,
   origin: 'Lagos',
   destination: 'Kaduna',
   trip_date: '2019-07-30T00:00:00.000Z',
   fare: 8500,
-  status: 1,
+  trip_id: 3,
 };
 
 describe('TRIP Tests', () => {
@@ -38,9 +40,9 @@ describe('TRIP Tests', () => {
       });
     done();
   });
-  it('Should patch a Trips', (done) => {
+  it('Should patch a Trip', (done) => {
     chai.request(app)
-      .get('/v1/trips/568')
+      .patch('/v1/trips/1')
       .send(trip)
       .end((err, res) => {
         res.should.have.status(200);

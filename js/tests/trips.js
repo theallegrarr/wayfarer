@@ -22,16 +22,18 @@ _dotenv2.default.config();
 _chai2.default.use(_chaiHttp2.default);
 
 var trip = {
-  id: 568,
-  token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNhc3RvNDdAZ21haWwuY29tIiwiaWQiOjY2LCJpYXQiOjE1NjMzNjcyMDcsImV4cCI6MTU2MzM5NjAwN30.Wj6B1b7BIPpi7c8817BJLrQ3r62b9kxUyUllL70L9A0',
-  user_id: 66,
+  email: 'joely@gmail.com',
+  first_name: 'John',
+  last_name: 'Van',
+  password: 'batoore',
   is_admin: true,
+  token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvZWx5QGdtYWlsLmNvbSIsImlkIjo5LCJpYXQiOjE1NjMzNjk2NzYsImV4cCI6MTU2MzM5ODQ3Nn0.m1sbdBLi6yVUODKWm6afNzSs9xOGQYIXWS1rLgoCPMI',
   bus_id: 1,
   origin: 'Lagos',
   destination: 'Kaduna',
   trip_date: '2019-07-30T00:00:00.000Z',
   fare: 8500,
-  status: 1
+  trip_id: 3
 };
 
 describe('TRIP Tests', function () {
@@ -47,8 +49,8 @@ describe('TRIP Tests', function () {
     });
     done();
   });
-  it('Should patch a Trips', function (done) {
-    _chai2.default.request(_app2.default).get('/v1/trips/568').send(trip).end(function (err, res) {
+  it('Should patch a Trip', function (done) {
+    _chai2.default.request(_app2.default).patch('/v1/trips/1').send(trip).end(function (err, res) {
       res.should.have.status(200);
     });
     done();

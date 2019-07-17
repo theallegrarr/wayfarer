@@ -6,7 +6,6 @@ function addBook(info) {
 
   return new Promise((resolve, reject) => {
     let rowcount = -1;
-    console.log(info);
     bookfind(0, -1, -1).then((result) => {
       if (result) {
         rowcount = result.rowCount;

@@ -17,8 +17,6 @@ function adduser(data) {
       console.log(err);
       return 'failed';
     }
-
-    console.log(res);
     return 'success';
   });
 }
