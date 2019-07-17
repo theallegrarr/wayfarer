@@ -23,7 +23,7 @@ if (process.env.PLACE === 'Travis') {
 
   pool.query('INSERT INTO btrips(id, bus_id, origin, destination, trip_date, fare, status) VALUES($1, $2, $3, $4, $5, $6, $7)', [1, data.bus_id, data.origin, data.destination, data.trip_date, data.fare, data.status], (err, res) => {
     if (err) {
-      console.log(err);
+      console.log('data creation failed: ', err);
     }
   });
 }
