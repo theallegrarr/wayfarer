@@ -5,7 +5,7 @@
   "main": "./js/server.js",
   "scripts": {
     "pretest": "node ./js/model/createdb.js",
-    "test": "nyc mocha ./js/tests/*.js",
+    "test": "mocha ./js/tests/*.js",
     "lint": "eslint ./",
     "build": "babel src -d js",
     "prestart": "node ./js/model/createdb.js",
