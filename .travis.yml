@@ -9,3 +9,5 @@ addons:
     secure: secret
 env:
 - JWT_KEY=secret
+script:
+- npm run test:coveralls
