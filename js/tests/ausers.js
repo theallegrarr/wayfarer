@@ -50,7 +50,7 @@ describe('USER OPERATIONS', function () {
   });
 
   var user = {
-    email: 'joely@gmail.com',
+    email: 'kempo20@gmail.com',
     password: 'batoore',
     is_admin: 'true'
   };
@@ -63,7 +63,7 @@ describe('USER OPERATIONS', function () {
   });
 
   var user2 = {
-    email: 'joely@gmail.com',
+    email: 'kempo20@gmail.com',
     password: 'batare',
     is_admin: true
   };
