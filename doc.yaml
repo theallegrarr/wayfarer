@@ -1,4 +1,4 @@
-swagger: "2.0"
+swagger: '2.0'
 info:
   description: "This is a documentation of the various applications and uses of the WayFarer API"
   version: 1.0.0
@@ -30,6 +30,9 @@ paths:
           description: choose a password
           required: true
           type: string
+          schema:
+            type: string
+            example: password
         - name: first_name
           in: body
           description: user first name
@@ -40,10 +43,14 @@ paths:
           description: user last name
           required: true
           type: string
-        - in: body
+        - in: query
           name: email
           description: Register for a user account
           required: true
+          type: string
+          schema:
+            type: string
+            example: user@mail.com
       responses:
         "201":
           description: User Created
@@ -63,12 +70,20 @@ paths:
           in: body
           description: enter account email
           required: true
-          type: string
-        - in: body
-          name: password
+          schema:
+            type: string
+            example: user@mail.com
+        - name: password
+          in: body
           description: enter account password
-          required: false
+          required: true
+          type: string
+          schema:
+            type: string
+            example: password
       responses:
+        "200":
+          description: success
         "401":
           description: Wrong login parameters
   /trips:
@@ -88,19 +103,33 @@ paths:
           description: choose a bus ID
           required: true
           type: integer
+          schema:
+            type: integer
+            example: 4
         - name: destination
           in: body
           description: set trip destination
           required: true
           type: string
+          schema:
+            type: string
+            example: Lagos
         - name: origin
           in: body
           description: set trip origin
           required: true
+          type: body
+          schema:
+            type: string
+            example: Ibadan
         - name: trip_date
           in: body
           description: set trip date
           required: true
+          type: string
+          schema:
+            type: string
+            example: "2019-09-01"
       responses:
         "201":
           description: Created
@@ -119,6 +148,7 @@ paths:
           description: trips are displayed
         "400":
           description: Invalid user
+  "/trips/{tripId}":
     patch:
       tags:
         - Trips
@@ -145,10 +175,13 @@ paths:
         - application/json
       parameters:
         - name: token
-          in: path
+          in: body
           description: token for authentication
           required: true
           type: string
+          schema:
+            type: string
+            example: jsjyuhaqiashs
       responses:
         "200":
           description: success
@@ -159,19 +192,19 @@ paths:
         - Bookings
       summary: Creates a booking
       description: "Creates a booking with the trip id provided"
-      operationId: updatePetWithForm
+      operationId: createBooking
       consumes:
         - application/json
       produces:
         - application/json
       parameters:
         - name: trip_id
-          in: body
+          in: query
           description: ID of trip you want to book
           required: true
           type: string
         - name: token
-          in: body
+          in: query
           description: user token
           required: true
           type: string

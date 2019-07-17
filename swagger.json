@@ -177,7 +177,7 @@
            { "tags": [ "Bookings" ],
              "summary": "Creates a booking",
              "description": "Creates a booking with the trip id provided",
-             "operationId": "updatePetWithForm",
+             "operationId": "createbook",
              "consumes": [ "application/json" ],
              "produces": [ "application/json" ],
              "parameters": 
