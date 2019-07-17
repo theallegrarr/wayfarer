@@ -44,8 +44,6 @@ paths:
           name: email
           description: Register for a user account
           required: true
-          schema:
-            $ref: "#/auth/signin"
       responses:
         "201":
           description: User Created
