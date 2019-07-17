@@ -1,4 +1,5 @@
 # WayFarer API
+## [Documentation Page](https://wayfarern.herokuapp.com/v1/doc/)
 This is a documentation of the various applications and uses of the WayFarer API
 
 ## Version: 1.0.0
