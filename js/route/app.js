@@ -45,11 +45,11 @@ app.use('/v1/auth/signin', _signin2.default);
 app.use('/v1/auth/signup', _signup2.default);
 app.use('/v1/trips', _trips2.default);
 app.use('/v1/bookings', _bookings2.default);
-app.use('/api-docs', _swaggerUiExpress2.default.serve, _swaggerUiExpress2.default.setup(_swagger2.default));
+app.use('/v1/api-docs', _swaggerUiExpress2.default.serve, _swaggerUiExpress2.default.setup(_swagger2.default));
 
 app.use('/', function (req, res) {
-  res.status(200).json({
-    message: 'success'
+  res.status(400).json({
+    message: 'content not found'
   });
 });
 

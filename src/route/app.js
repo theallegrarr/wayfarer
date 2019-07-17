@@ -14,11 +14,11 @@ app.use('/v1/auth/signin', logRoute);
 app.use('/v1/auth/signup', regRoute);
 app.use('/v1/trips', trips);
 app.use('/v1/bookings', bookings);
-app.use('/api-docs', swagger.serve, swagger.setup(swaggerDoc));
+app.use('/v1/api-docs', swagger.serve, swagger.setup(swaggerDoc));
 
 app.use('/', (req, res) => {
-  res.status(200).json({
-    message: 'success',
+  res.status(400).json({
+    message: 'content not found',
   });
 });
 
