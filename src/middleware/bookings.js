@@ -8,8 +8,8 @@ const router = express.Router();
 
 router.post('/', (req, res) => {
 
-  verify(req).then((result2) => {
-    if (result2) {
+  verify(req).then((details) => {
+    if (details) {
       addbooks(req.body).then((data) => {
         if (data === 'invalid id') {
           res.status(400).json({
@@ -29,7 +29,7 @@ router.post('/', (req, res) => {
         });
       });
     }
-    if (result2 === false) {
+    if (details === false) {
       res.status(400).json({
         status: 'error',
         error: 'user not valid',

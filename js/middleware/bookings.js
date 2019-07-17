@@ -30,8 +30,8 @@ var router = _express2.default.Router();
 
 router.post('/', function (req, res) {
 
-  (0, _verify2.default)(req).then(function (result2) {
-    if (result2) {
+  (0, _verify2.default)(req).then(function (details) {
+    if (details) {
       (0, _addbooks2.default)(req.body).then(function (data) {
         if (data === 'invalid id') {
           res.status(400).json({
@@ -51,7 +51,7 @@ router.post('/', function (req, res) {
         });
       });
     }
-    if (result2 === false) {
+    if (details === false) {
       res.status(400).json({
         status: 'error',
         error: 'user not valid'
