@@ -9,5 +9,6 @@ addons:
     secure: secret
 env:
 - JWT_KEY=secret
-script:
-- npm run test:coveralls
+test:
+	$(MAKE) lint
+	@NODE_ENV=test ./node_modules/.bin/mocha -b --reporter $(REPORTER)
