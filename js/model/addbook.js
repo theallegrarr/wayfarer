@@ -52,11 +52,10 @@ function getTripInfo(tripId) {
       if (res.rowCount > 0) {
         var data = res.rows[0];
         resolve(data);
-        reject(err);
       } else {
         resolve('invalid id');
-        reject(err);
       }
+      throw err;
     });
   }).catch(function (err) {
     return err;
@@ -113,6 +112,7 @@ function addbook(info, rowc) {
 
           pool.query('INSERT INTO bbookings(id, user_id, trip_id, bus_id, trip_date, seat_number, first_name, last_name, email) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9)', [data.id, data.user_id, data.trip_id, data.bus_id, data.trip_date, data.seat_number, data.first_name, data.last_name, data.email], function (err, res) {
             resolve(data);
+            throw err;
           });
         }).catch(function (err) {
           if (err) {

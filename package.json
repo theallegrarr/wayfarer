@@ -10,7 +10,7 @@
     "build": "babel src -d js",
     "prestart": "node ./js/model/createdb.js",
     "start": "node ./js/server.js",
-    "filefix": "eslint --fix ./model/trips.js",
+    "filefix": "eslint --fix ./swagger.json",
     "dbase": "node ./js/model/createdb.js",
     "heroku-postbuild": "npm install --production"
   },
@@ -31,7 +31,8 @@
     "jsonwebtoken": "^8.5.1",
     "npm-install-all": "^1.1.21",
     "pg": "^7.11.0",
-    "simple-node-logger": "^18.12.23"
+    "simple-node-logger": "^18.12.23",
+    "swagger-ui-express": "^4.0.7"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
