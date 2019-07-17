@@ -37,7 +37,7 @@ var details = {
 // const signUp = request.agent(app);
 describe('USER OPERATIONS', function () {
   it('Should add users', function (done) {
-
+    console.log(details);
     _chai2.default.request(_app2.default).post('/v1/auth/signup').send(details).end(function (err, res) {
       try {
         res.should.have.status(201);
