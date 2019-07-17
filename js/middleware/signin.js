@@ -34,7 +34,6 @@ router.post('/', function (req, res) {
   };
 
   var validEmail = _emailValidator2.default.validate(data.email);
-  console.log(validEmail, ' ', data);
   if (data.password === undefined || validEmail === false) {
     res.status(401.1).json({
       status: 'error',
@@ -44,7 +43,6 @@ router.post('/', function (req, res) {
 
   (0, _signin2.default)(data).then(function (result) {
     if (result !== 'failed') {
-      console.log(result, ' ', data);
       res.status(200).json({
         status: 'success',
         data: {

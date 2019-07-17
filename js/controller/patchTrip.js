@@ -24,7 +24,6 @@ function deletebook(info) {
         }).catch(function (err) {
           if (err) {
             console.log(err);
-            reject(err);
           }
         });
       } else {
@@ -33,7 +32,6 @@ function deletebook(info) {
     }).catch(function (err) {
       if (err) {
         console.log(err);
-        reject(err);
       }
     });
   });

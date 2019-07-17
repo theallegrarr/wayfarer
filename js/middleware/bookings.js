@@ -29,7 +29,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var router = _express2.default.Router();
 
 router.post('/', function (req, res) {
-
   (0, _verify2.default)(req).then(function (result2) {
     if (result2) {
       (0, _addbooks2.default)(req.body).then(function (data) {
@@ -44,7 +43,6 @@ router.post('/', function (req, res) {
           data: data
         });
       }).catch(function (error) {
-        console.log(error);
         res.status(400).json({
           status: 'error',
           error: error
@@ -69,7 +67,6 @@ router.delete('/:id', function (req, res) {
   (0, _verify2.default)(req).then(function (result2) {
     if (result2) {
       (0, _deletebook2.default)(req.params.id, req.body, result2.id).then(function (result) {
-        console.log('test result: ', result2.id, result);
         if (result === 'success') {
           res.status(200).json({
             status: 'success',
@@ -79,7 +76,6 @@ router.delete('/:id', function (req, res) {
             }
           });
         } else {
-          console.log(req.body);
           res.status(400).json({
             status: 'error',
             error: result
@@ -87,7 +83,6 @@ router.delete('/:id', function (req, res) {
         }
       });
     } else {
-      console.log(req.body);
       res.status(401).json({
         status: 'error',
         error: 'user not valid'
@@ -95,7 +90,6 @@ router.delete('/:id', function (req, res) {
     }
   }).catch(function (error) {
     if (error) {
-      console.log(req.body);
       res.status(409).json({
         status: 'error',
         error: 'delete failed'
@@ -107,9 +101,8 @@ router.delete('/:id', function (req, res) {
 router.get('/', function (req, res) {
   (0, _verify2.default)(req).then(function (result2) {
     if (result2) {
-      if (req.body.is_admin === true) {
-        (0, _getbooks2.default)(0, 0, -1).then(function (data) {
-          console.log(data);
+      if (result2.is_admin === true) {
+        (0, _getbooks2.default)(0, -1, -1).then(function (data) {
           if (data) {
             res.status(200).json({
               status: 'success',
@@ -139,7 +132,7 @@ router.get('/', function (req, res) {
         });
       }
     } else if (result2 === false) {
-      res.status(400).json({
+      res.status(401).json({
         status: 'error',
         error: 'user not valid'
       });

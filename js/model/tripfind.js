@@ -27,7 +27,7 @@ function bookfind(tripid) {
   var query = {
     // give the query a unique name
     name: 'fetch-user',
-    text: 'SELECT * FROM trips WHERE trip_id = $1',
+    text: 'SELECT * FROM btrips WHERE id = $1',
     values: [tripid]
   };
   return new Promise(function (resolve, reject) {

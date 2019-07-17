@@ -12,6 +12,8 @@ var _chaiHttp = require('chai-http');
 
 var _chaiHttp2 = _interopRequireDefault(_chaiHttp);
 
+var _assert = require('assert');
+
 var _app = require('../route/app');
 
 var _app2 = _interopRequireDefault(_app);
@@ -25,7 +27,7 @@ var should = _chai2.default.should();
 
 var details = {
   id: 9,
-  email: 'kempo2@gmail.com',
+  email: 'kempo20@gmail.com',
   first_name: 'Helga',
   last_name: 'Paul',
   password: 'batoore',
@@ -35,16 +37,20 @@ var details = {
 // const signUp = request.agent(app);
 describe('USER OPERATIONS', function () {
   it('Should add users', function (done) {
+    // console.log(details);
     _chai2.default.request(_app2.default).post('/v1/auth/signup').send(details).end(function (err, res) {
-      res.should.have.status(201);
-      (0, _chai.expect)(res.body).to.have.property('message');
-      // console.log('Response Body:', res.body);
+      try {
+        res.should.have.status(201);
+      } catch (error) {
+        throw new _assert.AssertionError(error);
+      }
+      (0, _chai.expect)(res.body).to.have.property('data');
     });
     done();
   });
 
   var user = {
-    email: 'joely@gmail.com',
+    email: 'kempo20@gmail.com',
     password: 'batoore',
     is_admin: 'true'
   };
@@ -52,13 +58,12 @@ describe('USER OPERATIONS', function () {
   it('Should Sign In', function (done) {
     _chai2.default.request(_app2.default).post('/v1/auth/signin').send(user).end(function (err, res) {
       res.should.have.status(200);
-      // console.log('Response Body:', res.body);
     });
     done();
   });
 
   var user2 = {
-    email: 'joely@gmail.com',
+    email: 'kempo20@gmail.com',
     password: 'batare',
     is_admin: true
   };

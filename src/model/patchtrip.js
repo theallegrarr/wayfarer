@@ -15,15 +15,14 @@ function patch(tripid) {
   // let value = '';
   const query = {
     // give the query a unique name
-    name: 'fetch-trips',
     text: 'UPDATE btrips SET status=$2 WHERE id=$1',
-    values: [tripid,0],
+    values: [tripid, 0],
   };
   return new Promise((resolve, reject) => {
     pool.query(query, (error, results) => {
       let val = '';
       if (error) {
-        reject(error);
+        throw (error);
       }
       if (results) {
         val = 'true';

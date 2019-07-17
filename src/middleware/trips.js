@@ -7,7 +7,6 @@ import patchTrip from '../controller/patchTrip';
 const router = express.Router();
 
 router.post('/', (req, res) => {
-  console.log(req.body);
   verify(req).then((result2) => {
     if (result2) {
       addtrips(req.body).then((data) => {
@@ -55,7 +54,6 @@ router.patch('/:tripId', (req, res) => {
 router.get('/', (req, res) => {
   verify(req).then((result2) => {
     if (result2) {
-      console.log(result2);
       viewtrips().then((data) => {
         if (data !== 'failed') {
           res.status(200).json({

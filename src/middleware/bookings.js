@@ -7,7 +7,6 @@ import verify from '../controller/verify2';
 const router = express.Router();
 
 router.post('/', (req, res) => {
-
   verify(req).then((result2) => {
     if (result2) {
       addbooks(req.body).then((data) => {
@@ -22,7 +21,6 @@ router.post('/', (req, res) => {
           data,
         });
       }).catch((error) => {
-        console.log(error);
         res.status(400).json({
           status: 'error',
           error,
@@ -47,7 +45,6 @@ router.delete('/:id', (req, res) => {
   verify(req).then((result2) => {
     if (result2) {
       deletebook(req.params.id, req.body, result2.id).then((result) => {
-        console.log('test result: ',result2.id,result);
         if (result === 'success') {
           res.status(200).json({
             status: 'success',
@@ -57,7 +54,6 @@ router.delete('/:id', (req, res) => {
             },
           });
         } else {
-          console.log(req.body);
           res.status(400).json({
             status: 'error',
             error: result,
@@ -65,7 +61,6 @@ router.delete('/:id', (req, res) => {
         }
       });
     } else {
-      console.log(req.body);
       res.status(401).json({
         status: 'error',
         error: 'user not valid',
@@ -73,7 +68,6 @@ router.delete('/:id', (req, res) => {
     }
   }).catch((error) => {
     if (error) {
-      console.log(req.body);
       res.status(409).json({
         status: 'error',
         error: 'delete failed',
@@ -85,9 +79,8 @@ router.delete('/:id', (req, res) => {
 router.get('/', (req, res) => {
   verify(req).then((result2) => {
     if (result2) {
-      if (req.body.is_admin === true) {
-        getBooks(0, 0, -1).then((data) => {
-          console.log(data);
+      if (result2.is_admin === true) {
+        getBooks(0, -1, -1).then((data) => {
           if (data) {
             res.status(200).json({
               status: 'success',
@@ -117,7 +110,7 @@ router.get('/', (req, res) => {
         });
       }
     } else if (result2 === false) {
-      res.status(400).json({
+      res.status(401).json({
         status: 'error',
         error: 'user not valid',
       });

@@ -26,21 +26,18 @@ function bookfind(id, tripId, userId) {
   var query = '';
   if (id > 0) {
     query = {
-      // give the query a unique name
       text: 'SELECT * FROM bbookings WHERE id = $1',
       values: [id]
     };
   }
   if (tripId >= 0 && id === 0) {
     query = {
-      // give the query a unique name
       text: 'SELECT * FROM bbookings WHERE trip_id = $1',
       values: [tripId]
     };
   }
   if (id === 0) {
     query = {
-      // give the query a unique name
       text: 'SELECT * FROM bbookings'
     };
   }
@@ -54,10 +51,10 @@ function bookfind(id, tripId, userId) {
 
   return new Promise(function (resolve, reject) {
     pool.query(query, function (error, results) {
-      console.log(id);
       var val = '';
       if (error) {
-        reject(error);
+        resolve(false);
+        throw error;
       }
       if (results) {
         if (results.rowCount > 0) {
@@ -73,7 +70,6 @@ function bookfind(id, tripId, userId) {
           resolve(val);
         }
       }
-      reject(error);
     });
   }).catch(function (error) {
     if (error) {
