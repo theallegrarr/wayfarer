@@ -16,7 +16,7 @@ function bookfind(tripid) {
   const query = {
     // give the query a unique name
     name: 'fetch-user',
-    text: 'SELECT * FROM btrips WHERE trip_id = $1',
+    text: 'SELECT * FROM btrips WHERE id = $1',
     values: [tripid],
   };
   return new Promise((resolve, reject) => {
