@@ -12,11 +12,29 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function addTrip(info) {
   return new Promise(function (resolve, reject) {
+    var data = {
+      id: null,
+      bus_id: info.bus_id,
+      origin: info.origin,
+      destination: info.destination,
+      trip_date: info.trip_date,
+      fare: info.fare,
+      status: 1.0
+    };
 
-    (0, _addtrips2.default)(info).then(function (result) {
-      var val = result;
-      console.log(info);
-      resolve(val);
+    (0, _addtrips2.default)(data).then(function (result) {
+
+      var productData = {
+        id: result,
+        bus_id: info.bus_id,
+        origin: info.origin,
+        destination: info.destination,
+        trip_date: info.trip_date,
+        fare: info.fare,
+        status: 1.0
+      };
+      console.log(productData);
+      resolve(productData);
     }).catch(function (error) {
       console.log(error);
       reject(error);

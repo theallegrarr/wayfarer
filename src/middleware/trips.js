@@ -7,7 +7,6 @@ import patchTrip from '../controller/patchTrip';
 const router = express.Router();
 
 router.post('/', (req, res) => {
-  console.log(req.body);
   verify(req).then((result2) => {
     if (result2) {
       addtrips(req.body).then((data) => {

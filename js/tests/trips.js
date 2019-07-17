@@ -21,10 +21,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 _dotenv2.default.config();
 _chai2.default.use(_chaiHttp2.default);
 
-var user = {
-  id: 4,
-  token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNhc3RvQGdtYWlsLmNvbSIsImlkIjo3NDcsImlhdCI6MTU2MzI4Nzk0MCwiZXhwIjoxNTYzMzE2NzQwfQ.DZgNzf8hlF8yHek7dorqZ3kDyUlkU1rUqVHhzJ-35ow',
-  user_id: 4,
+var trip = {
+  id: 568,
+  token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNhc3RvNDdAZ21haWwuY29tIiwiaWQiOjY2LCJpYXQiOjE1NjMzNjcyMDcsImV4cCI6MTU2MzM5NjAwN30.Wj6B1b7BIPpi7c8817BJLrQ3r62b9kxUyUllL70L9A0',
+  user_id: 66,
   is_admin: true,
   bus_id: 1,
   origin: 'Lagos',
@@ -36,13 +36,19 @@ var user = {
 
 describe('TRIP Tests', function () {
   it('Should Create Trip', function (done) {
-    _chai2.default.request(_app2.default).post('/v1/trips').send(user).end(function (err, res) {
+    _chai2.default.request(_app2.default).post('/v1/trips').send(trip).end(function (err, res) {
       res.should.have.status(201);
     });
     done();
   });
   it('Should return all Trips', function (done) {
-    _chai2.default.request(_app2.default).get('/v1/trips').send(user).end(function (err, res) {
+    _chai2.default.request(_app2.default).get('/v1/trips').send(trip).end(function (err, res) {
+      res.should.have.status(200);
+    });
+    done();
+  });
+  it('Should patch a Trips', function (done) {
+    _chai2.default.request(_app2.default).get('/v1/trips/568').send(trip).end(function (err, res) {
       res.should.have.status(200);
     });
     done();

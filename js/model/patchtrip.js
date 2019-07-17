@@ -26,7 +26,6 @@ function patch(tripid) {
   // let value = '';
   var query = {
     // give the query a unique name
-    name: 'fetch-trips',
     text: 'UPDATE btrips SET status=$2 WHERE id=$1',
     values: [tripid, 0]
   };
@@ -34,7 +33,7 @@ function patch(tripid) {
     pool.query(query, function (error, results) {
       var val = '';
       if (error) {
-        reject(error);
+        throw error;
       }
       if (results) {
         val = 'true';

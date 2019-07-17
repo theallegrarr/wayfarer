@@ -107,8 +107,8 @@ router.delete('/:id', function (req, res) {
 router.get('/', function (req, res) {
   (0, _verify2.default)(req).then(function (result2) {
     if (result2) {
-      if (req.body.is_admin === true) {
-        (0, _getbooks2.default)(0, 0, -1).then(function (data) {
+      if (result2.is_admin === true) {
+        (0, _getbooks2.default)(0, -1, -1).then(function (data) {
           console.log(data);
           if (data) {
             res.status(200).json({
@@ -139,7 +139,7 @@ router.get('/', function (req, res) {
         });
       }
     } else if (result2 === false) {
-      res.status(400).json({
+      res.status(401).json({
         status: 'error',
         error: 'user not valid'
       });
