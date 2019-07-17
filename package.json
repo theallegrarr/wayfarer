@@ -5,11 +5,11 @@
   "main": "./js/server.js",
   "scripts": {
     "pretest": "node ./js/model/createdb.js",
-    "test": "mocha ./js/tests/*.js",
+    "test": "nyc mocha ./js/tests/*.js",
     "lint": "eslint ./",
     "build": "babel src -d js",
     "prestart": "node ./js/model/createdb.js",
-    "test:coveralls": "jest --coverage --coverageReporters=text-lcov | coveralls",
+    "coverage": "nyc report --reporter=text-lcov | coveralls",
     "start": "node ./js/server.js",
     "filefix": "eslint --fix ./swagger.json",
     "dbase": "node ./js/model/createdb.js",
@@ -47,6 +47,7 @@
     "jest": "^24.8.0",
     "mocha": "^6.1.4",
     "mocha-lcov-reporter": "^1.3.0",
+    "nyc": "^14.1.1",
     "superagent": "^5.1.0",
     "supertest": "^4.0.2"
   },
