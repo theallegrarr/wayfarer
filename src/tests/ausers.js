@@ -21,7 +21,7 @@ const details = {
 // const signUp = request.agent(app);
 describe('USER OPERATIONS', () => {
   it('Should add users', (done) => {
-    console.log(details);
+    // console.log(details);
     chai.request(app)
       .post('/v1/auth/signup')
       .send(details)

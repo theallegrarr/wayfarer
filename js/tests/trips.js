@@ -39,6 +39,7 @@ var trip = {
 describe('TRIP Tests', function () {
   it('Should Create Trip', function (done) {
     _chai2.default.request(_app2.default).post('/v1/trips').send(trip).end(function (err, res) {
+      console.log(res.body.data.id);
       res.should.have.status(201);
     });
     done();

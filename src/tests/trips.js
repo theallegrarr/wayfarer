@@ -27,6 +27,7 @@ describe('TRIP Tests', () => {
       .post('/v1/trips')
       .send(trip)
       .end((err, res) => {
+        console.log(res.body.data.id);
         res.should.have.status(201);
       });
     done();
