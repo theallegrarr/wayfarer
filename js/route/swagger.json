@@ -1,0 +1,231 @@
+{ 
+    "swagger": "2.0",
+    "info": 
+     { "description": "This is a documentation of the various applications and uses of the WayFarer API",
+       "version": 1.0,
+       "title": "WayFarer API" },
+    "basePath": "/v1/",
+    "schemes": [ "http" ],
+    "paths": 
+     { "/auth/signup": 
+        { "post": 
+           { "tags": [ "Sign Up" ],
+             "summary": "Create a user account",
+             "x-swagger-router-controller": "SampleController",
+             "description": "You can register with this route and get your access token",
+             "operationId": "signUp",
+             "consumes": [ "application/json" ],
+             "produces": [ "application/json" ],
+             "parameters": 
+              [ { "in": "body",
+                  "name": "id",
+                  "description": "set a user ID",
+                  "required": true,
+                  "type": "integer" },
+                { "name": "password",
+                  "in": "body",
+                  "description": "choose a password",
+                  "required": true,
+                  "type": "string",
+                  "schema": {
+                    "type": "string",
+                    "example": "password"
+                } },
+                { "name": "first_name",
+                  "in": "body",
+                  "description": "user first name",
+                  "required": true,
+                  "type": "string",
+                  "schema": {
+                    "type": "string",
+                    "example": "firstname"
+                } },
+                { "name": "last_name",
+                  "in": "body",
+                  "description": "user last name",
+                  "required": true,
+                  "type": "string",
+                  "schema": {
+                    "type": "string",
+                    "example": "lastname"
+                } },
+                { "in": "body",
+                  "name": "email",
+                  "description": "Register for a user account",
+                  "required": true,
+                  "schema": {
+                    "type": "string",
+                    "example": "email@user.com"
+                } } ],
+             "responses": { "201": { "description": "User Created" } } } },
+       "/auth/signin": 
+        { "post": 
+           { "tags": [ "Sign in" ],
+             "summary": "Sign in to user account",
+             "description": "For returning members, you can simply use the sign in route to get an access token",
+             "operationId": "signin",
+             "consumes": [ "application/json" ],
+             "produces": [ "application/json" ],
+             "parameters": 
+              [ { "name": "email",
+                  "in": "body",
+                  "description": "enter account email",
+                  "required": true,
+                  "type": "string",
+                  "schema": {
+                    "type": "string",
+                    "example": "email@user.com"
+                } },
+                { "in": "body",
+                  "name": "password",
+                  "description": "enter account password",
+                  "required": true,
+                  "schema": {
+                    "type": "string",
+                    "example": "password"
+                } } ],
+             "responses": 
+              { "200": { "description": "success" },
+                "401": { "description": "Wrong login parameters" } } } },
+       "/trips": 
+        { "post": 
+           { "tags": [ "Trips" ],
+             "summary": "Create a trip",
+             "description": "Member can create trip for users to book seat on",
+             "operationId": "createTrip",
+             "consumes": [ "application/json" ],
+             "produces": [ "application/json" ],
+             "parameters": 
+              [ { "name": "bus_id",
+                  "in": "body",
+                  "description": "choose a bus ID",
+                  "required": true,
+                  "type": "integer",
+                  "schema": {
+                    "type": "integer",
+                    "example": 5
+                } },
+                { "name": "destination",
+                  "in": "body",
+                  "description": "set trip destination",
+                  "required": true,
+                  "type": "string",
+                  "schema": {
+                    "type": "string",
+                    "example": "Lagos"
+                } },
+                { "name": "origin",
+                  "in": "body",
+                  "description": "set trip origin",
+                  "required": true,
+                  "schema": {
+                    "type": "string",
+                    "example": "Ibadan"
+                } },
+                { "name": "trip_date",
+                  "in": "body",
+                  "description": "set trip date",
+                  "required": true,
+                  "schema": {
+                    "type": "string",
+                    "example": "2019-09-02"
+                } } ],
+             "responses": 
+              { "201": { "description": "Created" },
+                "400": { "description": "User not valid" } } },
+          "get": 
+           { "tags": [ "Trips" ],
+             "summary": "View all available trips",
+             "description": "Any valid user can view all available trips.",
+             "operationId": "viewtrips",
+             "produces": [ "application/json" ],
+             "responses": 
+              { "200": { "description": "trips are displayed" },
+                "400": { "description": "invalid user" } } } },
+        "/trips/{tripId}": {
+          "patch": 
+           { "tags": [ "Trips" ],
+             "summary": "Disable/Cancel a trip",
+             "description": "Any Admin can cancel a trip.",
+             "operationId": "patchtrip",
+             "produces": [ "application/json" ],
+             "responses": 
+              { "200": { "description": "trip is disabled" },
+                "400": { "description": "only admin allowed to patch trips" } } } },
+       "/Bookings": 
+        { "get": 
+           { "tags": [ "Bookings" ],
+             "summary": "View all Bookings",
+             "description": "Returns all stored Bookings",
+             "operationId": "getBookings",
+             "consumes": [ "application/json" ],
+             "produces": [ "application/json" ],
+             "parameters": 
+              [ { "name": "token",
+                  "in": "path",
+                  "description": "token for authentication",
+                  "required": true,
+                  "type": "string",
+                  "schema": {
+                    "type": "string",
+                    "example": "5362525172636Yhnts"
+                } } ],
+             "responses": 
+              { "200": { "description": "success" },
+                "400": { "description": "error" } } },
+          "post": 
+           { "tags": [ "Bookings" ],
+             "summary": "Creates a booking",
+             "description": "Creates a booking with the trip id provided",
+             "operationId": "createbook",
+             "consumes": [ "application/json" ],
+             "produces": [ "application/json" ],
+             "parameters": 
+              [ { "name": "trip_id",
+                  "in": "body",
+                  "description": "ID of trip you want to book",
+                  "required": true,
+                  "type": "integer",
+                  "schema": {
+                    "type": "integer",
+                    "example": 5
+                } },
+                { "name": "token",
+                  "in": "body",
+                  "description": "user token",
+                  "required": true,
+                  "type": "string" } ],
+             "responses": 
+              { "201": { "description": "success" },
+                "400": { "description": "failed" } } } },
+       "/Bookings/{bookingId}": 
+        { "delete": 
+           { "tags": [ "Bookings" ],
+             "summary": "Deletes a booking",
+             "description": "User can delete any booking he/her creates",
+             "operationId": "deletebook",
+             "consumes": [ "application/json" ],
+             "produces": [ "application/json" ],
+             "parameters": 
+              [ { "name": "bookingId",
+                  "in": "path",
+                  "description": "reference the id for your booking in the route",
+                  "required": true,
+                  "type": "integer",
+                  "schema": {
+                    "type": "integer",
+                    "example": "17"
+                } },
+                { "name": "token",
+                  "in": "path",
+                  "description": "token for authentication",
+                  "required": true,
+                  "type": "string" } ],
+             "responses": 
+              { "200": { "description": "success" },
+                "400": { "description": "failed" } 
+                } 
+            } 
+        } 
+    } 
+}
