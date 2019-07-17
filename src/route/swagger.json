@@ -26,22 +26,37 @@
                   "in": "body",
                   "description": "choose a password",
                   "required": true,
-                  "type": "string" },
+                  "type": "string",
+                  "schema": {
+                    "type": "string",
+                    "example": "password"
+                } },
                 { "name": "first_name",
                   "in": "body",
                   "description": "user first name",
                   "required": true,
-                  "type": "string" },
+                  "type": "string",
+                  "schema": {
+                    "type": "string",
+                    "example": "firstname"
+                } },
                 { "name": "last_name",
                   "in": "body",
                   "description": "user last name",
                   "required": true,
-                  "type": "string" },
+                  "type": "string",
+                  "schema": {
+                    "type": "string",
+                    "example": "lastname"
+                } },
                 { "in": "body",
                   "name": "email",
                   "description": "Register for a user account",
                   "required": true,
-                  "schema": { "$ref": "#/auth/signin" } } ],
+                  "schema": {
+                    "type": "string",
+                    "example": "email@user.com"
+                } } ],
              "responses": { "201": { "description": "User Created" } } } },
        "/auth/signin": 
         { "post": 
@@ -56,11 +71,19 @@
                   "in": "body",
                   "description": "enter account email",
                   "required": true,
-                  "type": "string" },
+                  "type": "string",
+                  "schema": {
+                    "type": "string",
+                    "example": "email@user.com"
+                } },
                 { "in": "body",
                   "name": "password",
                   "description": "enter account password",
-                  "required": false } ],
+                  "required": true,
+                  "schema": {
+                    "type": "string",
+                    "example": "password"
+                } } ],
              "responses": 
               { "200": { "description": "success" },
                 "401": { "description": "Wrong login parameters" } } } },
@@ -77,20 +100,36 @@
                   "in": "body",
                   "description": "choose a bus ID",
                   "required": true,
-                  "type": "integer" },
+                  "type": "integer",
+                  "schema": {
+                    "type": "integer",
+                    "example": 5
+                } },
                 { "name": "destination",
                   "in": "body",
                   "description": "set trip destination",
                   "required": true,
-                  "type": "string" },
+                  "type": "string",
+                  "schema": {
+                    "type": "string",
+                    "example": "Lagos"
+                } },
                 { "name": "origin",
                   "in": "body",
                   "description": "set trip origin",
-                  "required": true },
+                  "required": true,
+                  "schema": {
+                    "type": "string",
+                    "example": "Ibadan"
+                } },
                 { "name": "trip_date",
                   "in": "body",
                   "description": "set trip date",
-                  "required": true } ],
+                  "required": true,
+                  "schema": {
+                    "type": "string",
+                    "example": "2019-09-02"
+                } } ],
              "responses": 
               { "201": { "description": "Created" },
                 "400": { "description": "User not valid" } } },
@@ -102,7 +141,8 @@
              "produces": [ "application/json" ],
              "responses": 
               { "200": { "description": "trips are displayed" },
-                "400": { "description": "invalid user" } } },
+                "400": { "description": "invalid user" } } } },
+        "/trips/{tripId}": {
           "patch": 
            { "tags": [ "Trips" ],
              "summary": "Disable/Cancel a trip",
@@ -125,7 +165,11 @@
                   "in": "path",
                   "description": "token for authentication",
                   "required": true,
-                  "type": "string" } ],
+                  "type": "string",
+                  "schema": {
+                    "type": "string",
+                    "example": "5362525172636Yhnts"
+                } } ],
              "responses": 
               { "200": { "description": "success" },
                 "400": { "description": "error" } } },
@@ -133,7 +177,7 @@
            { "tags": [ "Bookings" ],
              "summary": "Creates a booking",
              "description": "Creates a booking with the trip id provided",
-             "operationId": "updatePetWithForm",
+             "operationId": "createbook",
              "consumes": [ "application/json" ],
              "produces": [ "application/json" ],
              "parameters": 
@@ -141,7 +185,11 @@
                   "in": "body",
                   "description": "ID of trip you want to book",
                   "required": true,
-                  "type": "string" },
+                  "type": "integer",
+                  "schema": {
+                    "type": "integer",
+                    "example": 5
+                } },
                 { "name": "token",
                   "in": "body",
                   "description": "user token",
@@ -163,7 +211,11 @@
                   "in": "path",
                   "description": "reference the id for your booking in the route",
                   "required": true,
-                  "type": "string" },
+                  "type": "integer",
+                  "schema": {
+                    "type": "integer",
+                    "example": "17"
+                } },
                 { "name": "token",
                   "in": "path",
                   "description": "token for authentication",
