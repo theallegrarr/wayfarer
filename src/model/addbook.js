@@ -24,7 +24,7 @@ function getUserInfo(user) {
         resolve('failed');
       }
     });
-  }).catch((err) => {console.log(err)});
+  }).catch((err) => { console.log(err); });
 }
 
 function getTripInfo(tripId) {
@@ -33,11 +33,10 @@ function getTripInfo(tripId) {
       if (res.rowCount > 0) {
         const data = res.rows[0];
         resolve(data);
-        reject(err);
       } else {
         resolve('invalid id');
-        reject(err);
       }
+      throw (err);
     });
   }).catch(err => err);
 }
@@ -63,7 +62,7 @@ function addbook(info, rowc) {
   let rowcount = 0;
   let seat = 0;
   return new Promise((resolve, reject) => {
-    getUserInfo(info).then((result) => { 
+    getUserInfo(info).then((result) => {
       getTripInfo(info.trip_id).then((result2) => {
         getSeats(info.trip_id).then((result3) => {
           const tripInfo = result2;
@@ -90,6 +89,7 @@ function addbook(info, rowc) {
 
           pool.query('INSERT INTO bbookings(id, user_id, trip_id, bus_id, trip_date, seat_number, first_name, last_name, email) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9)', [data.id, data.user_id, data.trip_id, data.bus_id, data.trip_date, data.seat_number, data.first_name, data.last_name, data.email], (err, res) => {
             resolve(data);
+            throw (err);
           });
         }).catch((err) => {
           if (err) {
