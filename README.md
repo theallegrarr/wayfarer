@@ -1,6 +1,6 @@
-# WayFarer API
+# WayFarer API [![Build Status](https://travis-ci.com/theallegrarr/wayfarer.svg?branch=develop)](https://travis-ci.com/theallegrarr/wayfarer)
+
 https://wayfarern.herokuapp.com/v1/
-[![Build Status](https://travis-ci.com/theallegrarr/wayfarer.svg?branch=develop)](https://travis-ci.com/theallegrarr/wayfarer)
 ## [Documentation Page](https://wayfarern.herokuapp.com/v1/doc/)
 This is a documentation of the various applications and uses of the WayFarer API
 
