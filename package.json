@@ -29,7 +29,7 @@
     "custom-env": "^1.0.2",
     "dotenv": "^8.0.0",
     "email-validator": "^2.0.4",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "jsonwebtoken": "^8.5.1",
     "npm-install-all": "^1.1.21",
     "pg": "^7.11.0",
